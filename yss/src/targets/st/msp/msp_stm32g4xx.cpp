@@ -23,67 +23,30 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
-#ifndef YSS_CLASS_GPIO_STM32F1_F4_F7__H_
-#define YSS_CLASS_GPIO_STM32F1_F4_F7__H_
+#include <drv/mcu.h>
 
-#include <yss/error.h>
-#include <drv/peripheral.h>
+#if defined(STM32G4)
 
-#if defined(STM32F446xx)
+#include <config.h>
+#include <yss/instance.h>
+#include <targets/st/bitfield.h>
 
-#include "define_stm32f446xx.h"
-
-#elif defined(STM32F429xx)
-
-#include "define_stm32f429xx.h"
-
-#elif defined(STM32F1) || defined(GD32F1)
-
-#include "define_stm32f103xx.h"
-
-#endif
-
-class Gpio : public GpioBase
+extern "C"
 {
-public:
-	struct Setup
+	void __WEAK SystemCoreClockUpdate(void)
 	{
-		YSS_GPIO_Peri *dev;
-		uint8_t exti;
-	};
-	
-	// 핀을 출력으로 설정한다.
-	// 
-	// 반환
-	//		에러를 반환한다.
-	// uint8_t pin
-	//		출력으로 변경할 핀의 번호를 설정한다.
-	// uint8_t otype
-	//		출력핀의 출력 타입을 설정한다. enum OTYPE을 사용한다.
-	error setAsOutput(uint8_t pin, uint8_t ospeed = define::gpio::ospeed::MID, uint8_t otype = define::gpio::otype::PUSH_PULL);
 
-	void setPackageAsAltFunc(AltFunc *altport, uint8_t numOfPort, uint8_t ospeed, uint8_t otype);
+	}
+}
 
-	error setAsAltFunc(uint8_t pin, uint8_t altFunc, uint8_t ospeed = define::gpio::ospeed::MID, uint8_t otype = define::gpio::otype::PUSH_PULL);
+void __WEAK initializeSystem(void)
+{
 
-	void setAsInput(uint8_t pin, uint8_t pullUpDown = define::gpio::pupd::NONE);
+}
 
-	void setAsAnalog(uint8_t pin);
+void initializeDma(void)
+{
 
-	void setOutput(uint8_t pin, bool data);
-
-	void setPullUpDown(uint8_t pin, uint8_t pupd);
-
-	void setExti(uint8_t pin);
-	
-	bool getInputData(uint8_t pin);
-
-	// 아래 함수들은 시스템 함수로 사용자 호출을 금한다.
-	Gpio(const Drv::Setup drvSetup, const Setup setup);
-
-private:
-	YSS_GPIO_Peri *mDev;
-	uint8_t mExti;
-};
+}
 
 #endif

@@ -23,81 +23,53 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
-#ifndef YSS_PERIPHERAL__H_
-#define YSS_PERIPHERAL__H_
+#ifndef YSS_CLASS_GPIO_STM32__H_
+#define YSS_CLASS_GPIO_STM32__H_
 
-#include "mcu.h"
-#include <stdint.h>
+#include <yss/error.h>
+#include <drv/peripheral.h>
 
-#if defined(STM32F1)
+class Gpio : public GpioBase
+{
+public:
+	// 핀을 출력으로 설정한다.
+	// 
+	// 반환
+	//		에러를 반환한다.
+	// uint8_t pin
+	//		출력으로 변경할 핀의 번호를 설정한다.
+	// uint8_t otype
+	//		출력핀의 출력 타입을 설정한다. enum OTYPE을 사용한다.
+	error setAsOutput(uint8_t pin, uint8_t ospeed = define::gpio::ospeed::MID, uint8_t otype = define::gpio::otype::PUSH_PULL);
 
-#include <targets/st/stm32f1xx.h>
+	void setPackageAsAltFunc(AltFunc *altport, uint8_t numOfPort, uint8_t ospeed, uint8_t otype);
 
-#elif defined(STM32G4)
+	error setAsAltFunc(uint8_t pin, uint8_t altFunc, uint8_t ospeed = define::gpio::ospeed::MID, uint8_t otype = define::gpio::otype::PUSH_PULL);
 
-#include <targets/st/stm32g4xx.h>
+	void setAsInput(uint8_t pin, uint8_t pullUpDown = define::gpio::pupd::NONE);
 
-#elif defined(STM32F4)
+	void setAsAnalog(uint8_t pin);
 
-#include <targets/st/stm32f4xx.h>
+	void setOutput(uint8_t pin, bool data);
 
-#elif defined(STM32F7)
+	void setPullUpDown(uint8_t pin, uint8_t pupd);
 
-#include <targets/st/stm32f7xx.h>
+	void setExti(uint8_t pin);
+	
+	bool getInputData(uint8_t pin);
 
-#elif defined(GD32F10X_XD)
+	// 아래 함수들은 시스템 함수로 사용자 호출을 금한다.
+	struct Setup
+	{
+		YSS_GPIO_Peri *dev;
+		uint8_t exti;
+	};
 
-#include <targets/st/stm32f103xg.h>
-#include <targets/st/define_stm32f103xx.h>
+	Gpio(const Drv::Setup drvSetup, const Setup setup);
 
-#elif defined(GD32F10X_MD)
-
-#include <targets/st/stm32f103xb.h>
-#include <targets/st/define_stm32f103xx.h>
-
-#elif defined(GD32F4)
-
-#include <targets/st_gigadevice/gd32f4xx.h>
-
-#elif defined(NRF52840_XXAA)
-
-#include <targets/nordic/nrf52840.h>
-
-#elif defined(STM32L1)
-
-#include <targets/st_gigadevice/stm32l1xx.h>
-
-#elif defined(STM32F0)
-
-#include <targets/st_gigadevice/stm32f0xx.h>
-
-#elif defined(STM32F0_N)
-
-#include <targets/st/stm32f0xx.h>
-
-#elif defined(EFM32PG22) || defined(EFR32BG22)
-
-#include <targets/siliconlabs/em_device.h>
-
-#elif defined(MAX32672)
-
-#include <targets/maxim/max32672/max32672.h>
-#include <targets/maxim/max32672/define_max32672.h>
-
-#else
-
-typedef volatile int IRQn_Type;
-
-#define PendSV_IRQn 0
-#define SysTick_CTRL_CLKSOURCE_Pos 0
-#define SysTick_CTRL_TICKINT_Pos 0
-#define SysTick_CTRL_ENABLE_Pos 0
-
-#define SysTick ((SysTick_Type *)0) // !< SysTick configuration struct
-
-#define NVIC_DisableIRQ
-#define NVIC_EnableIRQ
-
-#endif
+private:
+	YSS_GPIO_Peri *mDev;
+	uint8_t mExti;
+};
 
 #endif

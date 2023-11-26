@@ -28,7 +28,6 @@
 #if defined(STM32F4)
 
 #include <config.h>
-
 #include <yss/instance.h>
 #include <targets/st/bitfield.h>
 
