@@ -92,6 +92,19 @@ void __WEAK initializeSystem(void)
 #error "SYSCLK 설정을 추가해주세요."
 #endif
 	);
+
+	// FLASH 성능 도구 활성화
+	flash.enableDataCache();
+	flash.enableInstructionCache();
+	flash.enablePrefetch();
+
+	clock.enableAhb1Clock(RCC_AHB2ENR_GPIOAEN_Pos);
+	clock.enableAhb1Clock(RCC_AHB2ENR_GPIOBEN_Pos);
+	clock.enableAhb1Clock(RCC_AHB2ENR_GPIOCEN_Pos);
+	clock.enableAhb1Clock(RCC_AHB2ENR_GPIODEN_Pos);
+	clock.enableAhb1Clock(RCC_AHB2ENR_GPIOEEN_Pos);
+	clock.enableAhb1Clock(RCC_AHB2ENR_GPIOFEN_Pos);
+	clock.enableAhb1Clock(RCC_AHB2ENR_GPIOGEN_Pos);
 }
 
 void initializeDma(void)

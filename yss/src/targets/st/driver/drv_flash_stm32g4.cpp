@@ -33,6 +33,21 @@
 #include <yss/reg.h>
 #include <targets/st/bitfield.h>
 
+void Flash::enableDataCache(bool en)
+{
+	setBitData(FLASH->ACR, en, FLASH_ACR_DCEN_Pos);
+}
+
+void Flash::enableInstructionCache(bool en)
+{
+	setBitData(FLASH->ACR, en, FLASH_ACR_ICEN_Pos);
+}
+
+void Flash::enablePrefetch(bool en)
+{
+	setBitData(FLASH->ACR, en, FLASH_ACR_PRFTEN_Pos);
+}
+
 #endif
 
 

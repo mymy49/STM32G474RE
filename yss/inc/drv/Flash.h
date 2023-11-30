@@ -37,6 +37,29 @@
 class Flash
 {
 public:
+#if defined(STM32G4)
+	// 데이터 캐쉬를 활성화 합니다.
+	//
+	// bool en
+	//		데이터 캐쉬 활성화 상태 설정 (true 활성화/false 비활성화)
+	void enableDataCache(bool en = true);
+#endif	
+
+#if defined(STM32G4)
+	// 코드 캐쉬를 활성화 합니다.
+	//
+	// bool en
+	//		코드 캐쉬 활성화 상태 설정 (true 활성화/false 비활성화)
+	void enableInstructionCache(bool en = true);
+#endif	
+
+#if defined(STM32G4)
+	// Prefetch를 활성화 합니다.
+	//
+	// bool en
+	//		Prefetch 활성화 상태 설정 (true 활성화/false 비활성화)
+	void enablePrefetch(bool en = true);
+#endif		
 };
 
 #else
