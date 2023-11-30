@@ -24,6 +24,8 @@
 #include <yss.h>
 #include <bsp.h>
 #include "memory.h"
+#include <yss/debug.h>
+#include <util/runtime.h>
 
 int main(void)
 {
@@ -38,6 +40,9 @@ int main(void)
 
 	while(1)
 	{
+#if !defined(ST_CUBE_IDE)
+		debug_printf("%d\r", (uint32_t)runtime::getMsec());
+#endif 
 		thread::yield();
 	}
 }

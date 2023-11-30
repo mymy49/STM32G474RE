@@ -129,9 +129,21 @@ void Clock::enableAhb1Clock(uint32_t position, bool en)
 	setBitData(RCC->AHB1ENR, en, position);
 }
 
+void Clock::resetAhb1(uint32_t position)
+{
+	setBitData(RCC->AHB1RSTR, true, position);
+	setBitData(RCC->AHB1RSTR, false, position);	
+}
+
 void Clock::enableAhb2Clock(uint32_t position, bool en)
 {
 	setBitData(RCC->AHB2ENR, en, position);
+}
+
+void Clock::resetAhb2(uint32_t position)
+{
+	setBitData(RCC->AHB2RSTR, true, position);
+	setBitData(RCC->AHB2RSTR, false, position);	
 }
 
 void Clock::enableAhb3Clock(uint32_t position, bool en)
@@ -139,9 +151,26 @@ void Clock::enableAhb3Clock(uint32_t position, bool en)
 	setBitData(RCC->AHB3ENR, en, position);
 }
 
+void Clock::resetAhb3(uint32_t position)
+{
+	setBitData(RCC->AHB3RSTR, true, position);
+	setBitData(RCC->AHB3RSTR, false, position);	
+}
+
+uint32_t Clock::getAhbClockFrequency(void)
+{
+	return getSystemClockFrequency() / gHpreDiv[getFieldData(RCC->CFGR, RCC_CFGR_HPRE_Msk, RCC_CFGR_HPRE_Pos)];
+}
+
 void Clock::enableApb1_1Clock(uint32_t position, bool en)
 {
 	setBitData(RCC->APB1ENR1, en, position);
+}
+
+void Clock::resetApb1_1(uint32_t position)
+{
+	setBitData(RCC->APB1RSTR1, true, position);
+	setBitData(RCC->APB1RSTR1, false, position);	
 }
 
 void Clock::enableApb1_2Clock(uint32_t position, bool en)
@@ -149,9 +178,31 @@ void Clock::enableApb1_2Clock(uint32_t position, bool en)
 	setBitData(RCC->APB1ENR2, en, position);
 }
 
+void Clock::resetApb1_2(uint32_t position)
+{
+	setBitData(RCC->APB1RSTR2, true, position);
+	setBitData(RCC->APB1RSTR2, false, position);	
+}
+
+uint32_t Clock::getApb1ClockFrequency(void)
+{
+	return getAhbClockFrequency() / gPpreDiv[getFieldData(RCC->CFGR, RCC_CFGR_PPRE1_Msk, RCC_CFGR_PPRE1_Pos)];
+}
+
 void Clock::enableApb2Clock(uint32_t position, bool en)
 {
 	setBitData(RCC->APB2ENR, en, position);
+}
+
+void Clock::resetApb2(uint32_t position)
+{
+	setBitData(RCC->APB2RSTR, true, position);
+	setBitData(RCC->APB2RSTR, false, position);	
+}
+
+uint32_t Clock::getApb2ClockFrequency(void)
+{
+	return getAhbClockFrequency() / gPpreDiv[getFieldData(RCC->CFGR, RCC_CFGR_PPRE2_Msk, RCC_CFGR_PPRE2_Pos)];
 }
 
 #if defined(PLL_USE)
@@ -434,6 +485,36 @@ error Clock::setSysclk(uint8_t sysclkSrc, uint8_t ahbDiv, uint8_t apb1Div, uint8
 
 	return error::ERROR_NONE;
 }
+
+uint32_t Clock::getSystemClockFrequency(void)
+{
+	using namespace define::clock::sysclk::src;
+
+	uint32_t clk;
+
+	// 클럭 소스의 주파수 얻기
+	switch (getFieldData(RCC->CFGR, RCC_CFGR_SW_Msk, RCC_CFGR_SW_Pos))
+	{
+	case HSI16 :
+		return HSI_FREQ;
+
+	case HSE :
+		// HSE 활성화 점검
+		if (~RCC->CR & RCC_CR_HSERDY_Msk)
+			return error::HSE_NOT_READY;
+		return gHseFreq;
+
+	case PLL :
+		// PLL 활성화 점검
+		if (~RCC->CR & RCC_CR_PLLRDY_Msk)
+			return error::PLL_NOT_READY;
+		return getMainPllPFrequency();
+
+	default:
+		return 0;
+	}
+}
+
 
 #endif
 

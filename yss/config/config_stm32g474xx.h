@@ -62,5 +62,18 @@
 // 주의 
 // 1. TIMER, PWM, CAPTURE는 실제 동일한 장치지만 OS 구조상 별도의 장치로 표현한다. 그러므로 동일한 번호의 TIMER, PWM, CAPTURE는 동시에 활성화 되지 못한다.
 
+// TIMER 활성화
+#define TIM1_ENABLE			false
+#define TIM2_ENABLE			false
+#define TIM3_ENABLE			false
+#define TIM4_ENABLE			false
+#define TIM5_ENABLE			false
+#define TIM6_ENABLE			false
+#define TIM7_ENABLE			false
+#define TIM8_ENABLE			false
+#define TIM15_ENABLE		false
+#define TIM16_ENABLE		false
+#define TIM17_ENABLE		false
+
 #endif
 

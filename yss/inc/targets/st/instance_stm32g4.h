@@ -36,5 +36,49 @@ extern Clock clock;
 extern Flash flash;
 #endif
 
+#if defined(TIM1)
+extern Timer timer1;
+#endif
+
+#if defined(TIM2)
+extern Timer timer2;
+#endif
+
+#if defined(TIM3)
+extern Timer timer3;
+#endif
+
+#if defined(TIM4)
+extern Timer timer4;
+#endif
+
+#if defined(TIM5)
+extern Timer timer5;
+#endif
+
+#if defined(TIM6)
+extern Timer timer6;
+#endif
+
+#if defined(TIM7)
+extern Timer timer7;
+#endif
+
+#if defined(TIM8)
+extern Timer timer8;
+#endif
+
+#if defined(TIM15)
+extern Timer timer15;
+#endif
+
+#if defined(TIM16)
+extern Timer timer16;
+#endif
+
+#if defined(TIM17)
+extern Timer timer17;
+#endif
+
 #endif
 

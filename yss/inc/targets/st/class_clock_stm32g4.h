@@ -29,6 +29,7 @@
 #include <yss/error.h>
 #include <drv/peripheral.h>
 #include <drv/Clock.h>
+#include <yss/Mutex.h>
 
 #if defined(STM32G474xx)
 #define PLL_USE
@@ -37,7 +38,7 @@
 #define PLL_R_USE
 #endif
 
-class Clock
+class Clock : public Mutex
 {
 public:
 	// 외부 HSE 크리스탈을 활성화 합니다.
@@ -62,6 +63,12 @@ public:
 	// 반환
 	//		에러를 반환합니다.
 	error setPowerScale(uint8_t scale);
+	
+	// SYSCLK 클럭을 읽어옵니다.
+	//
+	// 반환
+	//		SYSCLK 클럭을 읽어옵니다.
+	uint32_t getSystemClockFrequency(void);
 
 	// AHB1 버스 장치의 클럭을 활성화 합니다.
 	// uint32_t position
@@ -69,13 +76,25 @@ public:
 	// bool en = true
 	//		AHB1 버스의 position에서 설정한 장치를 켜거(true)나 끕(false)니다.
 	void enableAhb1Clock(uint32_t position, bool en = true);
+	
+	// AHB1 버스 장치를 리셋합니다.
+	//
+	// uint32_t position
+	//		AHB2 버스의 리셋할 장치의 비트필드의 비트 번호를 설정합니다.
+	void resetAhb1(uint32_t position);
 
-	// AHB2 버스 장치의 클럭을 활성화 합니다.
+	// AHB2 버스의 장치의 클럭을 활성화 합니다.
 	// uint32_t position
 	//		AHB2 버스의 활성화할 비트필드의 비트 번호를 설정합니다.
 	// bool en = true
 	//		AHB2 버스의 position에서 설정한 장치를 켜거(true)나 끕(false)니다.
 	void enableAhb2Clock(uint32_t position, bool en = true);
+
+	// AHB2 버스의 장치를 리셋합니다.
+	//
+	// uint32_t position
+	//		AHB2 버스의 리셋할 장치의 비트필드의 비트 번호를 설정합니다.
+	void resetAhb2(uint32_t position);
 
 	// AHB3 버스 장치의 클럭을 활성화 합니다.
 	// uint32_t position
@@ -84,12 +103,30 @@ public:
 	//		AHB3 버스의 position에서 설정한 장치를 켜거(true)나 끕(false)니다.
 	void enableAhb3Clock(uint32_t position, bool en = true);
 
+	// AHB3 버스의 장치를 리셋합니다.
+	//
+	// uint32_t position
+	//		AHB3 버스의 리셋할 장치의 비트필드의 비트 번호를 설정합니다.
+	void resetAhb3(uint32_t position);
+
+	// AHB 클럭을 읽어옵니다.
+	//
+	// 반환
+	//		SYSCLK 클럭을 읽어옵니다.
+	uint32_t getAhbClockFrequency(void);
+
 	// APB1_1 버스 장치의 클럭을 활성화 합니다.
 	// uint32_t position
 	//		APB1_1 버스의 활성화할 비트필드의 비트 번호를 설정합니다.
 	// bool en = true
 	//		APB1_1 버스의 position에서 설정한 장치를 켜거(true)나 끕(false)니다.
 	void enableApb1_1Clock(uint32_t position, bool en = true);
+
+	// APB1_1 버스의 장치를 리셋합니다.
+	//
+	// uint32_t position
+	//		APB1_1 버스의 리셋할 장치의 비트필드의 비트 번호를 설정합니다.
+	void resetApb1_1(uint32_t position);
 
 	// APB1_2 버스 장치의 클럭을 활성화 합니다.
 	// uint32_t position
@@ -98,12 +135,36 @@ public:
 	//		APB1_2 버스의 position에서 설정한 장치를 켜거(true)나 끕(false)니다.
 	void enableApb1_2Clock(uint32_t position, bool en = true);
 
+	// APB1_2 버스의 장치를 리셋합니다.
+	//
+	// uint32_t position
+	//		APB1_2 버스의 리셋할 장치의 비트필드의 비트 번호를 설정합니다.
+	void resetApb1_2(uint32_t position);
+
+	// APB1 버스 클럭을 읽어옵니다.
+	//
+	// 반환
+	//		APB1 버스의 클럭을 반환합니다.
+	uint32_t getApb1ClockFrequency(void);
+
 	// APB2 버스 장치의 클럭을 활성화 합니다.
 	// uint32_t position
 	//		APB2 버스의 활성화할 비트필드의 비트 번호를 설정합니다.
 	// bool en = true
 	//		APB2 버스의 position에서 설정한 장치를 켜거(true)나 끕(false)니다.
 	void enableApb2Clock(uint32_t position, bool en = true);
+
+	// APB2 버스의 장치를 리셋합니다.
+	//
+	// uint32_t position
+	//		APB2 버스의 리셋할 장치의 비트필드의 비트 번호를 설정합니다.
+	void resetApb2(uint32_t position);
+
+	// APB2 버스 클럭을 읽어옵니다.
+	//
+	// 반환
+	//		APB2 버스의 클럭을 반환합니다.
+	uint32_t getApb2ClockFrequency(void);
 
 #if defined(PLL_USE)
 	// 주 PLL을 활성화 합니다.
