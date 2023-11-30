@@ -21,30 +21,20 @@
 	WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#include <yss.h>
-#include <bsp.h>
-#include "memory.h"
-#include <yss/debug.h>
-#include <util/runtime.h>
+#ifndef DEV_LED__H_
+#define DEV_LED__H_
 
-int main(void)
+namespace Led
 {
-	// 운영체체 초기화
-	initializeYss();
+	// LED를 초기화 합니다.
+	void initilize(void);
 	
-	// 보드 초기화
-	initializeBoard();
+	// LED의 상태를 제어합니다.
+	//
+	// bool en
+	//		true일 때 LED가 켜지고, false일 때 LED가 꺼집니다.
+	void on(bool en);
+};
 
-	// 설정 저장용 메모리 초기화
-	Memory::initilize();
-
-	while(1)
-	{
-		Led::on(true);
-		thread::delay(500);
-
-		Led::on(false);
-		thread::delay(500);
-	}
-}
+#endif
 

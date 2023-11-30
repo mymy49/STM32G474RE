@@ -21,30 +21,20 @@
 	WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#include <yss.h>
-#include <bsp.h>
-#include "memory.h"
-#include <yss/debug.h>
-#include <util/runtime.h>
+#include <dev/led.h>
+#include <yss/instance.h>
 
-int main(void)
+namespace Led
 {
-	// 운영체체 초기화
-	initializeYss();
-	
-	// 보드 초기화
-	initializeBoard();
-
-	// 설정 저장용 메모리 초기화
-	Memory::initilize();
-
-	while(1)
+	void initilize(void)
 	{
-		Led::on(true);
-		thread::delay(500);
+		gpioA.setAsOutput(5);
 
-		Led::on(false);
-		thread::delay(500);
+		on(false);
+	}
+
+	void on(bool en)
+	{
+		gpioA.setOutput(5, en);
 	}
 }
-
