@@ -118,6 +118,9 @@
 // LTDC 활성화
 #define LTDC_ENABLE			false
 
+// PBUS 활성화
+#define PBUS_ENABLE			false
+
 // PWM 활성화
 #define PWM1_ENABLE			false
 #define PWM2_ENABLE			false

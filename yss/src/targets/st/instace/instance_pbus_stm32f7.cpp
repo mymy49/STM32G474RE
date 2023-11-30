@@ -34,7 +34,7 @@
 #include <targets/st/bitfield_stm32f767xx.h>
 #endif
 
-#if defined(PBUS_ENABLE)
+#if PBUS_ENABLE
 static void enableClock(bool en)
 {
 	clock.lock();

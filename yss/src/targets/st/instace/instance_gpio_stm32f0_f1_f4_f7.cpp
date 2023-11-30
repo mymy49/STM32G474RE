@@ -63,7 +63,7 @@ Gpio gpioH((YSS_GPIO_Peri*)GPIOH, 0, 0, define::gpio::Exti::PORTH);
 Gpio gpioI((YSS_GPIO_Peri*)GPIOI, 0, 0, define::gpio::Exti::PORTI);
 #endif
 
-#elif defined(STM32F4) || defined(STM32F7) || defined(STM32F0_N) || defined (STM32F1)
+#elif defined(STM32F4) || defined(STM32F7) || defined(STM32F0_N) || defined (STM32F1) || defined(STM32G4)
 
 using namespace define::gpio;
 

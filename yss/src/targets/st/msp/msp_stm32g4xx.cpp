@@ -98,13 +98,13 @@ void __WEAK initializeSystem(void)
 	flash.enableInstructionCache();
 	flash.enablePrefetch();
 
-	clock.enableAhb1Clock(RCC_AHB2ENR_GPIOAEN_Pos);
-	clock.enableAhb1Clock(RCC_AHB2ENR_GPIOBEN_Pos);
-	clock.enableAhb1Clock(RCC_AHB2ENR_GPIOCEN_Pos);
-	clock.enableAhb1Clock(RCC_AHB2ENR_GPIODEN_Pos);
-	clock.enableAhb1Clock(RCC_AHB2ENR_GPIOEEN_Pos);
-	clock.enableAhb1Clock(RCC_AHB2ENR_GPIOFEN_Pos);
-	clock.enableAhb1Clock(RCC_AHB2ENR_GPIOGEN_Pos);
+	clock.enableAhb2Clock(RCC_AHB2ENR_GPIOAEN_Pos);
+	clock.enableAhb2Clock(RCC_AHB2ENR_GPIOBEN_Pos);
+	clock.enableAhb2Clock(RCC_AHB2ENR_GPIOCEN_Pos);
+	clock.enableAhb2Clock(RCC_AHB2ENR_GPIODEN_Pos);
+	clock.enableAhb2Clock(RCC_AHB2ENR_GPIOEEN_Pos);
+	clock.enableAhb2Clock(RCC_AHB2ENR_GPIOFEN_Pos);
+	clock.enableAhb2Clock(RCC_AHB2ENR_GPIOGEN_Pos);
 }
 
 void initializeDma(void)

@@ -30,14 +30,7 @@
 #include <config.h>
 #include <yss/instance.h>
 #include <yss.h>
-
-#if defined(STM32F746xx)
-#include <targets/st/bitfield_stm32f746xx.h>
-#elif defined(STM32F103xB)
-#include <targets/st/bitfield_stm32f103xx.h>
-#elif defined(STM32F446xx)
-#include <targets/st/bitfield_stm32f446xx.h>
-#endif
+#include <targets/st/bitfield.h>
 
 uint32_t getApb1TimerClockFrequency(void);
 uint32_t getApb2TimerClockFrequency(void);

@@ -62,7 +62,7 @@ error FrameBuffer_::setColorMode(uint8_t colorMode)
 FrameBuffer_::~FrameBuffer_(void)
 {
 	if(mMemAllocFlag && mFrameBuffer)
-#if defined(YSS_L_HEAP_USE)
+#if YSS_L_HEAP_USE
 		lfree(mFrameBuffer);
 #else
 		delete mFrameBuffer;
@@ -84,7 +84,7 @@ error FrameBuffer_::setSize(uint16_t width, uint16_t height)
 	
 	// 메모리가 할당가능하고 이전에 이미 할당 받았다면 메모리를 해제한다.
 	if(mMemAllocFlag && mFrameBuffer)
-#if defined(YSS_L_HEAP_USE)
+#if YSS_L_HEAP_USE
 		lfree(mFrameBuffer);
 #else
 		delete mFrameBuffer;
@@ -92,7 +92,7 @@ error FrameBuffer_::setSize(uint16_t width, uint16_t height)
 	
 	// 메모리가 할당가능하다면 새로 메모리를 할당 받는다.
 	if(mMemAllocFlag)
-#if defined(YSS_L_HEAP_USE)
+#if YSS_L_HEAP_USE
 		mFrameBuffer = (uint8_t *)lmalloc(width * height * mDotSize);
 #else
 		mFrameBuffer = new uint8_t[width * height * mDotSize];

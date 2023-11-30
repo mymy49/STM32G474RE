@@ -85,18 +85,6 @@ public :
 		uint8_t pin;
 	};
 
-	// 아래 멤버 함수들을 상속 받는 곳에서 다시 선언하고 구현해야함
-
-	// 설정된 핀의 출력값을 제어한다.
-	// 
-	// uint8_t pin
-	//		설정할 핀의 번호를 설정한다.
-	// bool data
-	//		출력할 값을 설정한다. true일 경우 High가 출력된다.
-	void setOutput(uint8_t pin, bool data);
-
-	bool getInputData(uint8_t pin);
-
 	// 아래 함수는 시스템 함수로 사용자 호출을 금한다.
 	GpioBase(const Drv::Setup drvSetup) : Drv(drvSetup) {}
 };

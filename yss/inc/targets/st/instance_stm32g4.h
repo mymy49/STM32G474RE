@@ -36,6 +36,34 @@ extern Clock clock;
 extern Flash flash;
 #endif
 
+#if defined(GPIOA)
+extern Gpio gpioA;
+#endif
+
+#if defined(GPIOB)
+extern Gpio gpioB;
+#endif
+
+#if defined(GPIOC)
+extern Gpio gpioC;
+#endif
+
+#if defined(GPIOD)
+extern Gpio gpioD;
+#endif
+
+#if defined(GPIOE)
+extern Gpio gpioE;
+#endif
+
+#if defined(GPIOF)
+extern Gpio gpioF;
+#endif
+
+#if defined(GPIOG)
+extern Gpio gpioG;
+#endif
+
 #if defined(TIM1)
 extern Timer timer1;
 #endif

@@ -30,11 +30,7 @@
 
 #if defined(DMA2D) && defined(DMA2D_ENABLE) && USE_GUI
 
-#if defined(STM32F746xx)
-#include <targets/st/bitfield_stm32f746xx.h>
-#elif defined(STM32F429xx)
-#include <targets/st/bitfield_stm32f429xx.h>
-#endif
+#include <targets/st/bitfield.h>
 
 static void enableClock(bool en)
 {
