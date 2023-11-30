@@ -31,6 +31,14 @@
 #include <yss/instance.h>
 #include <targets/st/bitfield.h>
 
+#if defined(STM32G474xx)
+#if HSE_CLOCK_FREQ % 4000000
+#error "STM32G474xx의 HSE의 클럭 주파수는 반드시 4MHz의 배수를 사용해야 합니다."
+#endif
+#else
+#error "HSE의 클럭 주파수에 대한 에러 범위를 설정하세요."
+#endif
+
 extern "C"
 {
 	void __WEAK SystemCoreClockUpdate(void)
@@ -41,7 +49,49 @@ extern "C"
 
 void __WEAK initializeSystem(void)
 {
+	using namespace define::clock;
 
+	// Power Controller 클럭 활성화
+	clock.enableApb1_1Clock(RCC_APB1ENR1_PWREN_Pos);
+
+	// Power Scale 설정
+	clock.setPowerScale(powerScale::SCALE1_MODE);
+
+	// 외부 크리스탈 클럭 활성화
+#if defined(HSE_CLOCK_FREQ)
+	clock.enableHse(HSE_CLOCK_FREQ);
+#endif
+
+	// Main PLL 설정
+#if defined(STM32G474xx)
+	clock.enableMainPll(
+#if defined(HSE_CLOCK_FREQ)
+		pll::src::HSE,				// uint8_t src
+		HSE_CLOCK_FREQ / 4000000,	// uint8_t m
+#else
+		pll::src::HSI,				// uint8_t src
+		16000000 / 4000000,			// uint8_t m
+#endif
+		85,							// uint16_t n
+		2,							// uint8_t pDiv
+		pll::qdiv::DIV2,			// uint8_t qDiv
+		pll::rdiv::DIV2				// uint8_t rDiv
+	);
+#else
+#error "PLL 설정을 추가해주세요."
+#endif
+	
+	// SYSCLK 설정
+#if defined(STM32G474xx)
+	clock.setSysclk(
+		sysclk::src::PLL,				// uint8_t sysclkSrc
+		divisionFactor::ahb::NO_DIV,	// uint8_t ahbDiv
+		divisionFactor::apb::NO_DIV,	// uint8_t apb1Div
+		divisionFactor::apb::NO_DIV		// uint8_t apb2Div
+#else
+#error "SYSCLK 설정을 추가해주세요."
+#endif
+	);
 }
 
 void initializeDma(void)

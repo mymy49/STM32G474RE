@@ -32,6 +32,13 @@
 
 #define FlashTargetHeaderFile	<targets/st/class_flash_stm32f0_f1_f4_f7.h>
 
+#elif defined(STM32G4)
+
+class Flash
+{
+public:
+};
+
 #else
 
 #define YSS_DRV_FLASH_UNSUPPORTED
@@ -40,6 +47,7 @@
 
 #include "Drv.h"
 
+#if !defined(STM32G4)
 class FlashBase : public Drv
 {
   public:
@@ -56,6 +64,7 @@ class FlashBase : public Drv
 
 #if !defined(YSS_DRV_FLASH_UNSUPPORTED)
 #include FlashTargetHeaderFile
+#endif
 #endif
 
 #endif
