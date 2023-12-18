@@ -26,6 +26,18 @@
 #include "memory.h"
 #include <yss/debug.h>
 #include <util/runtime.h>
+#include <targets/st/bitfield.h>
+
+void thread_testUart(void)
+{
+	while(1)
+	{
+		thread::delay(500);
+		usart2.send("Hello Word!!\n\r", sizeof("Hello Word!!\n\r"));
+	}
+}
+
+extern uint32_t __FLASH_segment_size__;
 
 int main(void)
 {
@@ -37,6 +49,8 @@ int main(void)
 
 	// 설정 저장용 메모리 초기화
 	Memory::initilize();
+	
+	thread::add(thread_testUart, 512);
 
 	while(1)
 	{
