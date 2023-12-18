@@ -40,6 +40,7 @@ Dma::Dma(const Drv::Config drvConfig, const Config dmaConfig) : Drv(drvConfig)
 	mErrorFlag = false;
 	mAddr = 0;
 	mRemainSize = 0;
+	mThreadId = -1;
 }
 
 void Dma::initialize(void)
@@ -103,6 +104,8 @@ error Dma::transfer(DmaInfo &dmaInfo, void *data, int32_t  size)
 	while (!mCompleteFlag && !mErrorFlag)
 		thread::yield();
 	
+	mThreadId = -1;
+
 	if(mErrorFlag)
 		return error::DMA;
 	else
@@ -120,7 +123,7 @@ error Dma::send(DmaInfo &dmaInfo, void *src, int32_t  size)
 		mPeri->NDTR = 0xF000;
 		mPeri->PAR = (uint32_t)dmaInfo.dataRegister;
 		mPeri->M0AR = (uint32_t)src;
-		mPeri->M1AR = (uint32_t)src;
+//		mPeri->M1AR = (uint32_t)src;
 		mAddr = (uint32_t)src;
 		mRemainSize = size - 0xF000;
 	}
@@ -137,6 +140,8 @@ error Dma::send(DmaInfo &dmaInfo, void *src, int32_t  size)
 
 	while (!mCompleteFlag && !mErrorFlag)
 		thread::yield();
+
+	mThreadId = -1;
 
 	if(mErrorFlag)
 		return error::DMA;
@@ -184,6 +189,7 @@ void Dma::transferAsCircularMode(const DmaInfo *dmaInfo, void *src, uint16_t  si
 	mPeri->PAR = (uint32_t)dmaInfo->dataRegister;
 	mPeri->M0AR = (uint32_t)src;
 	mRemainSize = 0;
+	mThreadId = -1;
 	
 	mPeri->FCR = dmaInfo->controlRegister2;
 	mPeri->CR= dmaInfo->controlRegister1 | DMA_SxCR_CIRC_Msk;

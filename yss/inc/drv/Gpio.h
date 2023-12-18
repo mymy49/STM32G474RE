@@ -52,7 +52,7 @@ typedef NRF_GPIO_Type			YSS_GPIO_Peri;
 typedef GPIO_TypeDef			YSS_GPIO_Peri;
 #define GpioTargetHeaderFile	<targets/siliconlabs/class_gpio_efm32pg22_efr32bg22.h>
 
-#elif defined(STM32F7) || defined(STM32F1) || defined(STM32F4) || defined(STM32F0_N) || defined(GD32F1) || defined(STM32G4)
+#elif defined(STM32F7) || defined(STM32F1) || defined(STM32F4) || defined(STM32F0) || defined(GD32F1) || defined(STM32G4)
 
 typedef GPIO_TypeDef			YSS_GPIO_Peri;
 #define GpioTargetHeaderFile	<targets/st/class_gpio_stm32.h>

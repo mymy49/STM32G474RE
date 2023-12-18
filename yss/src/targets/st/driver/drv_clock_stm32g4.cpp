@@ -300,7 +300,7 @@ error Clock::enableMainPll(uint8_t src, uint8_t m, uint16_t n, uint8_t pDiv, uin
 		break;
 	}
 
-	vco = vco / m * n;
+	vco = vco / (m + 1) * n;
 	if (vco < vcoMin || vcoMax < vco)
 		return error::WRONG_CONFIG;
 
@@ -357,7 +357,7 @@ inline uint32_t getPllVcoFreq(void)
 		return 0;
 	}
 
-	clk /= getFieldData(RCC->PLLCFGR, RCC_PLLCFGR_PLLM_Msk, RCC_PLLCFGR_PLLM_Pos);
+	clk /= getFieldData(RCC->PLLCFGR, RCC_PLLCFGR_PLLM_Msk, RCC_PLLCFGR_PLLM_Pos) + 1;
 	clk *= getFieldData(RCC->PLLCFGR, RCC_PLLCFGR_PLLN_Msk, RCC_PLLCFGR_PLLN_Pos);
 
 	return clk;

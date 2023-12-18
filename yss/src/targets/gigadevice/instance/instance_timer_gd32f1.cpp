@@ -40,7 +40,7 @@ static const uint32_t gPpreDiv[8] = {1, 1, 1, 1, 2, 4, 8, 16};
 
 uint32_t getApb1TimerClockFrequency(void)
 {
-#if defined(STM32F0_N)
+#if defined(STM32F0)
 	int8_t pre = gPpreDiv[((RCC->CFGR & RCC_CFGR_PPRE_Msk) >> RCC_CFGR_PPRE_Pos)];
 #else
 	int8_t pre = gPpreDiv[((RCC->CFGR & RCC_CFGR_PPRE1_Msk) >> RCC_CFGR_PPRE1_Pos)];
@@ -54,7 +54,7 @@ uint32_t getApb1TimerClockFrequency(void)
 
 uint32_t getApb2TimerClockFrequency(void)
 {
-#if defined(STM32F0_N)
+#if defined(STM32F0)
 	int8_t pre = gPpreDiv[((RCC->CFGR & RCC_CFGR_PPRE_Msk) >> RCC_CFGR_PPRE_Pos)];
 #else
 	int8_t pre = gPpreDiv[((RCC->CFGR & RCC_CFGR_PPRE2_Msk) >> RCC_CFGR_PPRE2_Pos)];

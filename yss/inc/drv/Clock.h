@@ -34,19 +34,13 @@
 #define IncludeSubClassHeader	<targets/st/class_clock_stm32f4_f7.h>
 #elif defined(STM32G4)
 #include <targets/st/class_clock_stm32g4.h>
-#elif defined(STM32F0_N)
+#elif defined(STM32F0)
 #define IncludeSubClassHeader	<targets/st/class_clock_stm32f0.h>
 #elif defined(EFM32PG22) || defined(EFR32BG22)
 #define IncludeSubClassHeader	<targets/siliconlabs/class_clock_efm32pg22_efr32bg22.h>
 #elif defined(NRF52840_XXAA)
 #include <targets/nordic/ec_clock_nrf52840.h>
 #include <targets/nordic/define_clock_nrf52840.h>
-#elif defined(STM32L1)
-#include <targets/st_gigadevice/define_clock_stm32l1.h>
-#include <targets/st_gigadevice/ec_clock_stm32l1.h>
-#elif defined(STM32F0)
-#include <targets/st_gigadevice/ec_clock_stm32f0.h>
-#include <targets/st_gigadevice/define_clock_stm32f0.h>
 #elif defined(MAX32672)
 #define IncludeSubClassHeader	<targets/maxim/max32672/class_clock_max32672.h>
 #else

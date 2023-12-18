@@ -25,7 +25,7 @@
 
 #include <yss/instance.h>
 
-#if defined(STM32F0_N)
+#if defined(STM32F0)
 
 #include <config.h>
 #include <yss.h>

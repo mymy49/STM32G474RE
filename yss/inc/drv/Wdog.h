@@ -28,7 +28,7 @@
 
 #include "peripheral.h"
 
-#if defined(STM32F0_N)
+#if defined(STM32F0)
 
 typedef IWDG_TypeDef		YSS_WDOG_peri;
 

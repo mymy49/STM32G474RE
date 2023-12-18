@@ -25,7 +25,7 @@
 
 #include <drv/peripheral.h>
 
-#if defined(STM32F0_N)
+#if defined(STM32F0)
 
 #include <drv/Wdog.h>
 #include <yss.h>
@@ -33,12 +33,13 @@
 
 Wdog::Wdog(const Drv::Config drvConfig, const Config config) : Drv(drvConfig)
 {
-		
+	(void)config;
 }
 
 error Wdog::initialize(uint8_t prescale, uint16_t reload)
 {
-
+	(void)prescale;
+	(void)reload;
 	return error::ERROR_NONE;
 }
 

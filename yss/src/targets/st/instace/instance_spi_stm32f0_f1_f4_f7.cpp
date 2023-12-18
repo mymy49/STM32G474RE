@@ -25,7 +25,7 @@
 
 #include <drv/peripheral.h>
 
-#if defined(STM32F4) || defined(STM32F0_N) || defined(STM32F7) || defined(STM32F1)
+#if defined(STM32F4) || defined(STM32F0) || defined(STM32F7) || defined(STM32F1)
 
 #include <yss/instance.h>
 #include <config.h>
@@ -140,7 +140,7 @@ static const Dma::DmaInfo gSpi1RxDmaInfo =
 #endif
 };
 
-#if defined(STM32F0_N) || defined(STM32F1)
+#if defined(STM32F0) || defined(STM32F1)
 static const Spi::Setup gSpi1Setup = 
 {
 	SPI1,			//YSS_SPI_Peri *peri;
@@ -204,7 +204,7 @@ static const Drv::Setup gDrvSpi2Setup =
 
 static const Dma::DmaInfo gSpi2TxDmaInfo = 
 {
-#if defined(STM32F1) || defined(STM32F0_N) || defined(GD32F1)
+#if defined(STM32F1) || defined(STM32F0) || defined(GD32F1)
 	(define::dma::priorityLevel::LOW << DMA_CCR_PL_Pos) |		 // uint32_t controlRegister1
 	(define::dma::size::BYTE << DMA_CCR_MSIZE_Pos) |
 	(define::dma::size::BYTE << DMA_CCR_PSIZE_Pos) |
@@ -236,7 +236,7 @@ static const Dma::DmaInfo gSpi2TxDmaInfo =
 
 static const Dma::DmaInfo gSpi2RxDmaInfo = 
 {
-#if defined(STM32F1) || defined(STM32F0_N) || defined(GD32F1)
+#if defined(STM32F1) || defined(STM32F0) || defined(GD32F1)
 	(define::dma::priorityLevel::LOW << DMA_CCR_PL_Pos) |		// uint32_t controlRegister1
 	(define::dma::size::BYTE << DMA_CCR_MSIZE_Pos) |
 	(define::dma::size::BYTE << DMA_CCR_PSIZE_Pos) |
