@@ -33,7 +33,7 @@
 #define YSS_DRV_ADC_MAX_CH	18
 typedef ADC_TypeDef			YSS_ADC_Dev;
 
-#elif defined(STM32F4) || defined(STM32F7) || defined(STM32F0_N) || defined(STM32F1)
+#elif defined(STM32F4) || defined(STM32F7) || defined(STM32F0) || defined(STM32F1)
 
 #define YSS_DRV_ADC_MAX_CH	18
 typedef ADC_TypeDef			YSS_ADC_Dev;
@@ -80,7 +80,7 @@ class Adc : public Drv
 	//		결과값을 가져올 ADC Pin을 설정한다.
 	uint16_t get(uint8_t pin);
 
-#if defined(STM32F0_N)
+#if defined(STM32F0)
 	// 샘플 시간을 설정한다.
 	// 
 	// uint8_t sampleTime

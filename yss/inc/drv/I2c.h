@@ -28,7 +28,7 @@
 
 #include "peripheral.h"
 
-#if defined(STM32F0_N) || defined(STM32F7)
+#if defined(STM32F0) || defined(STM32F7)
 
 typedef I2C_TypeDef			YSS_I2C_Peri;
 

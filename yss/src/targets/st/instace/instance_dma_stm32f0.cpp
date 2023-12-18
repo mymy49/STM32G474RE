@@ -25,7 +25,7 @@
 
 #include <yss/instance.h>
 
-#if defined(STM32F0_N)
+#if defined(STM32F0)
 
 #include <targets/st/bitfield_stm32f030xx.h>
 
@@ -47,7 +47,8 @@ const Drv::Config gDrvDmaChannel1Config =
 {
 	enableDma1Clock,			//void (*clockFunc)(bool en);
 	enableDma1Stream0Interrupt,	//void (*nvicFunc)(bool en);
-	0							//void (*resetFunc)(void);
+	0,							//void (*resetFunc)(void);
+	0,							//uint32_t (*getClockFunc)(void);
 };
 
 const Dma::Config gDma1Config = 
@@ -83,7 +84,8 @@ const Drv::Config gDrvDmaChannel2Config =
 {
 	enableDma1Clock,			//void (*clockFunc)(bool en);
 	enableDma1Stream1Interrupt,	//void (*nvicFunc)(bool en);
-	0							//void (*resetFunc)(void);
+	0,							//void (*resetFunc)(void);
+	0,							//uint32_t (*getClockFunc)(void);
 };
 
 const Dma::Config gDma2Config = 
@@ -111,7 +113,8 @@ const Drv::Config gDrvDmaChannel3Config =
 {
 	enableDma1Clock,			//void (*clockFunc)(bool en);
 	enableDma1Stream2Interrupt,	//void (*nvicFunc)(bool en);
-	0							//void (*resetFunc)(void);
+	0,							//void (*resetFunc)(void);
+	0,							//uint32_t (*getClockFunc)(void);
 };
 
 const Dma::Config gDma3Config = 
@@ -151,7 +154,8 @@ const Drv::Config gDrvDmaChannel4Config =
 {
 	enableDma1Clock,			//void (*clockFunc)(bool en);
 	enableDma1Stream3Interrupt,	//void (*nvicFunc)(bool en);
-	0							//void (*resetFunc)(void);
+	0,							//void (*resetFunc)(void);
+	0,							//uint32_t (*getClockFunc)(void);
 };
 
 const Dma::Config gDma4Config = 
@@ -179,7 +183,8 @@ const Drv::Config gDrvDmaChannel5Config =
 {
 	enableDma1Clock,			//void (*clockFunc)(bool en);
 	enableDma1Stream4Interrupt,	//void (*nvicFunc)(bool en);
-	0							//void (*resetFunc)(void);
+	0,							//void (*resetFunc)(void);
+	0,							//uint32_t (*getClockFunc)(void);
 };
 
 const Dma::Config gDma5Config = 

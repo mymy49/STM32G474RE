@@ -25,7 +25,7 @@
 
 #include <drv/mcu.h>
 
-#if defined(STM32F0_N)
+#if defined(STM32F0)
 
 #include <drv/peripheral.h>
 #include <drv/Adc.h>
@@ -71,7 +71,7 @@ error Adc::initialize(void)
 
 void Adc::isr(void)
 {
-	int32_t dr = mDev->DR << 19, temp, abs;
+	int32_t dr = mDev->DR << 19, temp;
 	uint8_t index = mChannel[mIndex];
 
 	temp = dr - mResult[index];

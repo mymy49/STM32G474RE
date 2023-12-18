@@ -25,7 +25,7 @@
 
 #include <drv/mcu.h>
 
-#if defined(STM32F4) || defined(STM32F7) || defined(STM32F0_N) || defined(STM32F1) || defined(STM32G4)
+#if defined(STM32F4) || defined(STM32F7) || defined(STM32F0) || defined(STM32F1) || defined(STM32G4)
 
 #include <drv/peripheral.h>
 #include <yss/instance.h>
@@ -40,7 +40,7 @@
 
 #define TIM1_UP_IRQHandler		TIM1_UP_TIM10_IRQHandler
 #define TIM6_IRQHandler			TIM6_DAC_IRQHandler
-#elif defined(STM32F0_N)
+#elif defined(STM32F0)
 #define TIM1_UP_IRQn			TIM1_BRK_UP_TRG_COM_IRQn
 #endif
 
@@ -48,7 +48,7 @@ static const uint32_t gPpreDiv[8] = {1, 1, 1, 1, 2, 4, 8, 16};
 
 uint32_t getApb1TimerClockFrequency(void)
 {
-#if defined(STM32F0_N)
+#if defined(STM32F0)
 	int8_t pre = gPpreDiv[((RCC->CFGR & RCC_CFGR_PPRE_Msk) >> RCC_CFGR_PPRE_Pos)];
 #else
 	int8_t pre = gPpreDiv[((RCC->CFGR & RCC_CFGR_PPRE1_Msk) >> RCC_CFGR_PPRE1_Pos)];
@@ -62,7 +62,7 @@ uint32_t getApb1TimerClockFrequency(void)
 
 uint32_t getApb2TimerClockFrequency(void)
 {
-#if defined(STM32F0_N)
+#if defined(STM32F0)
 	int8_t pre = gPpreDiv[((RCC->CFGR & RCC_CFGR_PPRE_Msk) >> RCC_CFGR_PPRE_Pos)];
 #else
 	int8_t pre = gPpreDiv[((RCC->CFGR & RCC_CFGR_PPRE2_Msk) >> RCC_CFGR_PPRE2_Pos)];

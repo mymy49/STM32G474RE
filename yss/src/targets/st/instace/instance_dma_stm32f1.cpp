@@ -27,7 +27,7 @@
 
 #if defined(STM32F1)
 
-#include <targets/st/bitfield_stm32f103xx.h>
+#include <targets/st/bitfield.h>
 
 #define YSS_DMA1_Channel1_IRQHandler		DMA1_Channel1_IRQHandler
 #define YSS_DMA1_Channel2_IRQHandler		DMA1_Channel2_IRQHandler

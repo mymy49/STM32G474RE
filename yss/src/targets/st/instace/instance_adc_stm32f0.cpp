@@ -25,7 +25,7 @@
 
 #include <yss/instance.h>
 
-#if defined(STM32F0_N)
+#if defined(STM32F0)
 
 #include <config.h>
 #include <yss.h>
@@ -35,12 +35,12 @@
 #include <targets/st/bitfield_stm32f030xx.h>
 #endif
 
+#if ADC1_ENABLE && defined(ADC1)
 static uint32_t getClockFrequency(void)
 {
 	return clock.getApb2ClockFrequency();
 }
 
-#if ADC1_ENABLE && defined(ADC1)
 static void enableClockAdc1(bool en)
 {
 	clock.lock();

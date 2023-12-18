@@ -29,12 +29,7 @@
 
 #include <config.h>
 #include <yss.h>
-
-#if defined(STM32F446xx)
-#include <targets/st/bitfield_stm32f446xx.h>
-#elif defined(STM32F746xx)
-#include <targets/st/bitfield_stm32f746xx.h>
-#endif
+#include <targets/st/bitfield.h>
 
 #if I2S2_ENABLE && defined(I2S2)
 #if SPI2_ENABLE
