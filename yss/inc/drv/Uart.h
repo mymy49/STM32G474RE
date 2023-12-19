@@ -204,8 +204,8 @@ class Uart : public Drv
 	struct Setup
 	{
 		YSS_USART_Peri *dev;
-		Dma **dmaChannelList;
 		Dma::DmaInfo txDmaInfo;
+		Dma::DmaInfo rxDmaInfo;
 	};
 #elif defined(NRF52840_XXAA)
 	struct Setup
@@ -224,16 +224,18 @@ protected:
 	YSS_USART_Peri *mDev;
 	int8_t *mRcvBuf;
 	int32_t  mRcvBufSize;
-	int32_t  mTail, mHead;
 	bool mOneWireModeFlag;
 	void (*mIsrForFrameError)(void);
 	void (*mIsrForRxData)(uint8_t rxData);
 
-#if defined(GD32F1) || defined(STM32F1) || defined(GD32F4)  || defined(STM32F7) || defined(STM32F0) || defined(STM32F4)
-	Dma *mTxDma;
+#if defined(YSS__UART_RX_DMA)
+	int32_t  mTail;
+	Dma *mRxDma;
 	Dma::DmaInfo mTxDmaInfo;
-#elif defined(EFM32PG22) || defined(EFR32BG22) || defined(STM32G4)
-	Dma **mDmaChannelList;
+	Dma::DmaInfo mRxDmaInfo;
+#else
+	int32_t  mTail, mHead;
+	Dma *mTxDma;
 	Dma::DmaInfo mTxDmaInfo;
 #endif
 };

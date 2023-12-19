@@ -48,6 +48,9 @@
 #define YSS_USART3_6_IRQHandler		USART3_6_IRQHandler
 #endif
 
+using namespace define::dma;
+using namespace define::dmamux;
+
 #if USART2_ENABLE || USART3_ENABLE || USART4_ENABLE || UART4_ENABLE || USART5_ENABLE || UART5_ENABLE || UART7_ENABLE || UART8_ENABLE
 static uint32_t getApb1ClockFrequency(void)
 {
@@ -112,15 +115,15 @@ static const Dma::DmaInfo gUart1TxDmaInfo =
 #endif
 	(void*)&USART1->TDR,								//void *dataRegister;
 #elif defined(STM32G4)
-	(define::dma::priorityLevel::LOW << DMA_CCR_PL_Pos) |			// uint32_t ccr;
-	(define::dma::size::BYTE << DMA_CCR_MSIZE_Pos) |
-	(define::dma::size::BYTE << DMA_CCR_PSIZE_Pos) |
+	(priorityLevel::LOW << DMA_CCR_PL_Pos) |		// uint32_t ccr;
+	(size::BYTE << DMA_CCR_MSIZE_Pos) |
+	(size::BYTE << DMA_CCR_PSIZE_Pos) |
 	DMA_CCR_MINC_Msk | 
-	(define::dma::dir::MEM_TO_PERI << DMA_CCR_DIR_Pos) | 
+	(dir::MEM_TO_PERI << DMA_CCR_DIR_Pos) | 
 	DMA_CCR_TCIE_Msk | 
 	DMA_CCR_TEIE_Msk,
-	define::dmamux::input::USART1_TX << DMAMUX_CxCR_DMAREQ_ID_Pos,	// uint32_t muxccr;
-	(void*)&USART1->TDR												// void *cpar;
+	input::USART1_TX << DMAMUX_CxCR_DMAREQ_ID_Pos,	// uint32_t muxccr;
+	(void*)&USART1->TDR								// void *cpar;
 #else
 	(define::dma2::stream7::USART1_TX << DMA_SxCR_CHSEL_Pos) |	// uint32_t controlRegister1
 	(define::dma::burst::SINGLE << DMA_SxCR_MBURST_Pos) | 
@@ -143,6 +146,20 @@ static const Dma::DmaInfo gUart1TxDmaInfo =
 #endif
 };
 
+#if defined(STM32G4)
+static const Dma::DmaInfo gUart1RxDmaInfo = 
+{
+	(define::dma::priorityLevel::LOW << DMA_CCR_PL_Pos) |			// uint32_t ccr;
+	(define::dma::size::BYTE << DMA_CCR_MSIZE_Pos) |
+	(define::dma::size::BYTE << DMA_CCR_PSIZE_Pos) |
+	DMA_CCR_MINC_Msk | 
+	(define::dma::dir::PERI_TO_MEM << DMA_CCR_DIR_Pos) | 
+	DMA_CCR_CIRC_Msk,
+	define::dmamux::input::USART1_RX << DMAMUX_CxCR_DMAREQ_ID_Pos,	// uint32_t muxccr;
+	(void*)&USART1->RDR												// void *cpar;
+};
+#endif
+
 static const Uart::Setup gUart1Setup
 {
 #if defined(STM32F030xC)
@@ -155,8 +172,8 @@ static const Uart::Setup gUart1Setup
 #endif
 #elif defined(STM32G4)
 	(YSS_USART_Peri*)USART1,	//YSS_USART_Peri *peri;
-	dmaChannelList,				//Dma **dmaChannelList;
-	gUart1TxDmaInfo				//Dma::DmaInfo txDmaInfo;
+	gUart1TxDmaInfo,			//Dma::DmaInfo txDmaInfo;
+	gUart1RxDmaInfo,			//Dma::DmaInfo txDmaInfo;
 #else
 	USART1,	//YSS_USART_Peri *peri;
 	dmaChannel16,				//Dma &txDma;
@@ -266,6 +283,20 @@ static const Dma::DmaInfo gUart2TxDmaInfo =
 #endif
 };
 
+#if defined(STM32G4)
+static const Dma::DmaInfo gUart2RxDmaInfo = 
+{
+	(define::dma::priorityLevel::LOW << DMA_CCR_PL_Pos) |			// uint32_t ccr;
+	(define::dma::size::BYTE << DMA_CCR_MSIZE_Pos) |
+	(define::dma::size::BYTE << DMA_CCR_PSIZE_Pos) |
+	DMA_CCR_MINC_Msk | 
+	(define::dma::dir::PERI_TO_MEM << DMA_CCR_DIR_Pos) | 
+	DMA_CCR_CIRC_Msk,
+	define::dmamux::input::USART2_RX << DMAMUX_CxCR_DMAREQ_ID_Pos,	// uint32_t muxccr;
+	(void*)&USART2->RDR												// void *cpar;
+};
+#endif
+
 static const Uart::Setup gUart2Setup = 
 {
 #if defined(STM32F030xC)
@@ -278,8 +309,8 @@ static const Uart::Setup gUart2Setup =
 #endif
 #elif defined(STM32G4)
 	(YSS_USART_Peri*)USART2,	//YSS_USART_Peri *peri;
-	dmaChannelList,				//Dma **dmaChannelList;
-	gUart2TxDmaInfo				//Dma::DmaInfo txDmaInfo;
+	gUart2TxDmaInfo,			//Dma::DmaInfo txDmaInfo;
+	gUart2RxDmaInfo				//Dma::DmaInfo txDmaInfo;
 #else
 	(YSS_USART_Peri*)USART2,	//YSS_USART_Peri *peri;
 	dmaChannel7,				//Dma &txDma;
@@ -391,6 +422,20 @@ static const Dma::DmaInfo gUart3TxDmaInfo =
 #endif
 };
 
+#if defined(STM32G4)
+static const Dma::DmaInfo gUart3RxDmaInfo = 
+{
+	(define::dma::priorityLevel::LOW << DMA_CCR_PL_Pos) |			// uint32_t ccr;
+	(define::dma::size::BYTE << DMA_CCR_MSIZE_Pos) |
+	(define::dma::size::BYTE << DMA_CCR_PSIZE_Pos) |
+	DMA_CCR_MINC_Msk | 
+	(define::dma::dir::PERI_TO_MEM << DMA_CCR_DIR_Pos) | 
+	DMA_CCR_CIRC_Msk,
+	define::dmamux::input::USART3_RX << DMAMUX_CxCR_DMAREQ_ID_Pos,	// uint32_t muxccr;
+	(void*)&USART3->RDR												// void *cpar;
+};
+#endif
+
 static const Uart::Setup gUart3Setup
 {
 #if defined(STM32F030xC)
@@ -403,8 +448,8 @@ static const Uart::Setup gUart3Setup
 #endif
 #elif defined(STM32G4)
 	(YSS_USART_Peri*)USART3,	//YSS_USART_Peri *peri;
-	dmaChannelList,				//Dma **dmaChannelList;
-	gUart3TxDmaInfo				//Dma::DmaInfo txDmaInfo;
+	gUart3TxDmaInfo,			//Dma::DmaInfo txDmaInfo;
+	gUart3RxDmaInfo				//Dma::DmaInfo txDmaInfo;
 #else
 	USART3,			//YSS_SPI_Peri *peri;
 	dmaChannel4,	//Dma &txDma;
@@ -529,6 +574,20 @@ static const Dma::DmaInfo gUart4TxDmaInfo =
 #endif
 };
 
+#if defined(STM32G4)
+static const Dma::DmaInfo gUart4RxDmaInfo = 
+{
+	(define::dma::priorityLevel::LOW << DMA_CCR_PL_Pos) |			// uint32_t ccr;
+	(define::dma::size::BYTE << DMA_CCR_MSIZE_Pos) |
+	(define::dma::size::BYTE << DMA_CCR_PSIZE_Pos) |
+	DMA_CCR_MINC_Msk | 
+	(define::dma::dir::PERI_TO_MEM << DMA_CCR_DIR_Pos) | 
+	DMA_CCR_CIRC_Msk,
+	define::dmamux::input::UART4_RX << DMAMUX_CxCR_DMAREQ_ID_Pos,	// uint32_t muxccr;
+	(void*)&UART4->RDR												// void *cpar;
+};
+#endif
+
 static const Uart::Setup gUart4Setup = 
 {
 #if defined(STM32F030xC)
@@ -541,8 +600,8 @@ static const Uart::Setup gUart4Setup =
 	gUart4TxDmaInfo	//Dma::DmaInfo txDmaInfo;
 #elif defined(STM32G4)
 	(YSS_USART_Peri*)UART4,	//YSS_USART_Peri *peri;
-	dmaChannelList,				//Dma **dmaChannelList;
-	gUart4TxDmaInfo				//Dma::DmaInfo txDmaInfo;
+	gUart4TxDmaInfo,			//Dma::DmaInfo txDmaInfo;
+	gUart4RxDmaInfo				//Dma::DmaInfo txDmaInfo;
 #else
 	UART4,			//YSS_SPI_Peri *peri;
 	dmaChannel5,	//Dma &txDma;
@@ -669,6 +728,20 @@ static const Dma::DmaInfo gUart5TxDmaInfo =
 #endif
 };
 
+#if defined(STM32G4)
+static const Dma::DmaInfo gUart5RxDmaInfo = 
+{
+	(define::dma::priorityLevel::LOW << DMA_CCR_PL_Pos) |			// uint32_t ccr;
+	(define::dma::size::BYTE << DMA_CCR_MSIZE_Pos) |
+	(define::dma::size::BYTE << DMA_CCR_PSIZE_Pos) |
+	DMA_CCR_MINC_Msk | 
+	(define::dma::dir::PERI_TO_MEM << DMA_CCR_DIR_Pos) | 
+	DMA_CCR_CIRC_Msk,
+	define::dmamux::input::UART5_RX << DMAMUX_CxCR_DMAREQ_ID_Pos,	// uint32_t muxccr;
+	(void*)&UART5->RDR												// void *cpar;
+};
+#endif
+
 static const Uart::Setup gUart5Setup
 {
 #if defined(STM32F030xC)
@@ -681,8 +754,8 @@ static const Uart::Setup gUart5Setup
 #endif
 #elif defined(STM32G4)
 	(YSS_USART_Peri*)UART4,	//YSS_USART_Peri *peri;
-	dmaChannelList,				//Dma **dmaChannelList;
-	gUart5TxDmaInfo				//Dma::DmaInfo txDmaInfo;
+	gUart5TxDmaInfo,			//Dma::DmaInfo txDmaInfo;
+	gUart5RxDmaInfo				//Dma::DmaInfo txDmaInfo;
 #else
 	UART5,			//YSS_SPI_Peri *peri;
 	dmaChannel8,	//Dma &txDma;

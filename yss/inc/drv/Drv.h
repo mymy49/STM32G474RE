@@ -27,6 +27,9 @@
 #define YSS_DRV__H_
 
 #include <yss/Mutex.h>
+#include <drv/mcu.h>
+
+class Dma;
 
 class Drv : public Mutex
 {
@@ -55,6 +58,12 @@ class Drv : public Mutex
 	void reset(void);
 
 	uint32_t getClockFrequency(void);
+
+#if defined(YSS__UART_RX_DMA)
+	Dma* getOccupancyDma(void);
+
+	Dma* getIdleDma(void);
+#endif
 	
 	// 아래 함수는 시스템 함수로 사용자 호출을 금한다.
 	Drv(void (*clockFunc)(bool en), void (*nvicFunc)(bool en), void (*resetFunc)(void) = 0);
