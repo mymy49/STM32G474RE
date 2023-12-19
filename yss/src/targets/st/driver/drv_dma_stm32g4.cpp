@@ -130,6 +130,24 @@ error Dma::transfer(DmaInfo &dmaInfo, void *src, int32_t  size)
 		return error::ERROR_NONE;
 }
 
+void Dma::transferAsCircularMode(const DmaInfo *dmaInfo, void *src, uint16_t  size)
+{
+	mChannel->CNDTR = size;
+	mChannel->CPAR = (uint32_t)dmaInfo->cpar;
+	mChannel->CMAR = (uint32_t)src;
+	mRemainSize = 0;
+	mThreadId = -1;
+	
+	mChannel->CCR = dmaInfo->ccr;
+	mDmaMux->CCR = dmaInfo->muxccr;
+	mChannel->CCR |= DMA_CCR_EN_Msk;
+}
+
+uint16_t Dma::getCurrentTransferBufferCount(void)
+{
+	return mChannel->CNDTR;
+}
+
 void Dma::stop(void)
 {
 	mChannel->CCR &= ~DMA_CCR_EN_Msk;

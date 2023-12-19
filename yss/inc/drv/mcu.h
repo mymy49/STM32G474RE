@@ -73,6 +73,7 @@
 
 #define DEFAULT_CLOCK_SPEED 16000000
 #define YSS__CORE_CM3_CM4_CM7_H_GENERIC
+#define YSS__UART_RX_DMA
 
 #elif defined(GD32F10X_HD) || defined(GD32F10X_XD) || defined(GD32F10X_MD)
 

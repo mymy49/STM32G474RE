@@ -28,7 +28,7 @@
 #include <util/runtime.h>
 #include <targets/st/bitfield.h>
 
-void thread_testUart(void)
+void thread_testUartTx(void)
 {
 	while(1)
 	{
@@ -37,7 +37,15 @@ void thread_testUart(void)
 	}
 }
 
-extern uint32_t __FLASH_segment_size__;
+void thread_testUartRx(void)
+{
+	while(1)
+	{
+#if !defined(ST_CUBE_IDE)
+		debug_printf("%c\n", usart2.getWaitUntilReceive());
+#endif
+	}
+}
 
 int main(void)
 {
@@ -50,7 +58,8 @@ int main(void)
 	// 설정 저장용 메모리 초기화
 	Memory::initilize();
 	
-	thread::add(thread_testUart, 512);
+	thread::add(thread_testUartTx, 512);
+	thread::add(thread_testUartRx, 512);
 
 	while(1)
 	{

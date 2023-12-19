@@ -35,17 +35,17 @@
 
 Uart::Uart(const Drv::Setup drvSetup, const Setup setup) : Drv(drvSetup)
 {
-#if defined(STM32G4)
-	mDmaChannelList = setup.dmaChannelList;
+#if defined(YSS__UART_RX_DMA)
 	mTxDmaInfo = setup.txDmaInfo;
+	mRxDmaInfo = setup.rxDmaInfo;
 	mDev = setup.dev;
 	mRcvBuf = 0;
 	mTail = 0;
-	mHead = 0;
 	mOneWireModeFlag = false;
 	mIsrForFrameError = 0;
 	mIsrForRxData = 0;
-#elif defined(STM32F0) || defined(STM32F7)
+	mRxDma = 0;
+#else
 	mTxDma = &setup.txDma;
 	mTxDmaInfo = setup.txDmaInfo;
 	mDev = setup.dev;
@@ -107,12 +107,15 @@ error Uart::initialize(int32_t  baud, void *receiveBuffer, int32_t  receiveBuffe
 	
 #if defined(STM32G4)
 	// DMA 활성화
-	mDev->CR3 = USART_CR3_DMAT_Msk;		// TX DMA 활성화
+	mTail = mRcvBufSize;
+	mDev->CR3 = USART_CR3_DMAT_Msk | USART_CR3_DMAR_Msk;		// TX, RX DMA 활성화
+	mRxDma = getOccupancyDma();
+	mRxDma->transferAsCircularMode(&mRxDmaInfo, receiveBuffer, receiveBufferSize);
 #endif
 
 	// TX En, RX En, Rxnei En, 장치 En
 	mDev->CR3 |= USART_CR3_EIE_Msk;
-	mDev->CR1 = USART_CR1_TE_Msk | USART_CR1_RE_Msk | USART_CR1_RXNEIE_Msk | USART_CR1_UE_Msk;
+	mDev->CR1 = USART_CR1_TE_Msk | USART_CR1_RE_Msk | USART_CR1_UE_Msk;
 
 	return error::ERROR_NONE;
 }
@@ -208,7 +211,7 @@ error Uart::send(void *src, int32_t  size)
 error Uart::send(void *src, int32_t  size)
 {
 	error result;
-	uint8_t ch;
+	Dma *dma;
 
 	if(size == 0)
 		return error::ERROR_NONE;
@@ -220,18 +223,9 @@ error Uart::send(void *src, int32_t  size)
 		setBitData(mDev->CR1, false, USART_CR1_RE_Pos);	// RX 비활성화
 	}
 
-	while(1)
-	{
-		for(ch = 0; ch < DMA_COUNT; ch++)
-		{
-			if(mDmaChannelList[ch]->check())
-				goto sending;
-		}
-		thread::yield();
-	}
-
-sending:
-	result = mDmaChannelList[ch]->transfer(mTxDmaInfo, src, size);
+	dma = getIdleDma();
+	
+	result = dma->transfer(mTxDmaInfo, src, size);
 
 	if(result == error::ERROR_NONE)
 	{
@@ -244,7 +238,7 @@ sending:
 		setBitData(mDev->CR1, true, USART_CR1_RE_Pos);	// RX 활성화
 	}
 
-	mDmaChannelList[ch]->unlock();
+	dma->unlock();
 
 	return result;
 }

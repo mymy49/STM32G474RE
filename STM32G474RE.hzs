@@ -90,7 +90,7 @@
  </Watch4>
  <Files>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="40" useTextEdit="1" path="app/src/main.cpp" left="0" selected="1" top="16" codecName="UTF-8"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="2" y="82" useTextEdit="1" path="yss/inc/drv/Gpio.h" left="0" top="70" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="2" y="82" useTextEdit="1" path="yss/inc/drv/Gpio.h" left="0" top="48" codecName="Default"/>
  </Files>
  <ARMCrossStudioWindow activeProject="STM32G474RE" fileDialogDefaultFilter="*.c" autoConnectTarget="ST-LINK/V2" buildConfiguration="THUMB Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="" debugSearchPath="" autoConnectCapabilities="266111"/>
 </session>
