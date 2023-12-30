@@ -77,7 +77,7 @@ static void resetUart1(void)
 	clock.unlock();
 }
 
-static const Drv::Setup gDrvUart1Setup
+static const Drv::Setup_t gDrvUart1Setup
 {
 	enableUart1Clock,		//void (*clockFunc)(bool en);
 	enableUart1Interrupt,	//void (*nvicFunc)(bool en);
@@ -140,7 +140,7 @@ static void resetUart2(void)
 	clock.unlock();
 }
 
-static const Drv::Setup gDrvUart2Setup
+static const Drv::Setup_t gDrvUart2Setup
 {
 	enableUart2Clock,		//void (*clockFunc)(bool en);
 	enableUart2Interrupt,	//void (*nvicFunc)(bool en);
@@ -204,7 +204,7 @@ static void resetUart3(void)
 	clock.unlock();
 }
 
-static const Drv::Setup gDrvUart3Setup
+static const Drv::Setup_t gDrvUart3Setup
 {
 	enableUart3Clock,		//void (*clockFunc)(bool en);
 	enableUart3Interrupt,	//void (*nvicFunc)(bool en);
@@ -268,7 +268,7 @@ static void resetUart4(void)
 	clock.unlock();
 }
 
-static const Drv::Setup gDrvUart4Setup
+static const Drv::Setup_t gDrvUart4Setup
 {
 	enableUart4Clock,		//void (*clockFunc)(bool en);
 	enableUart4Interrupt,	//void (*nvicFunc)(bool en);

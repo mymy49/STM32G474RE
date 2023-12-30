@@ -25,63 +25,65 @@
 
 #ifndef YSS_DRV_USBD__H_
 #define YSS_DRV_USBD__H_
-/*
-#include "mcu.h"
 
-#if defined(USB)
+#include "peripheral.h"
 
-#if defined(STM32F1) || defined(STM32L0)
+#if defined(STM32F7)
 
 #define MAX_EP_NUM 8
+typedef USB_OTG_GlobalTypeDef		YSS_USB_TypeDef;
 
 #else
 
+#include <stdint.h>
+typedef volatile uint32_t			YSS_USB_TypeDef;
 #define YSS_DRV_USBD_UNSUPPORTED
 
 #endif
 
-#ifndef YSS_DRV_USBD_UNSUPPORTED
-
-#include "Drv.h"
-
 class Usbd : public Drv
 {
-	struct BufferInfo
-	{
-		uint16_t addr;
-		uint16_t rsvd0;
-		uint16_t cnt;
-		uint16_t rsvd1;
-	}__attribute__ ((__packed__));
+public :
+	void initialize(void);
 
-	struct BufferTable
-	{
-		BufferInfo tx0;
-		BufferInfo rx0;
-		BufferInfo tx1;
-		BufferInfo rx1;
-		BufferInfo tx2;
-		BufferInfo rx2;
-		BufferInfo tx3;
-		BufferInfo rx3;
-	}__attribute__ ((__packed__));
-
-	USB_TypeDef *mPeri;
-	void setEpStatusTx(uint8_t ep, uint16_t status);
-	void setEpStatusRx(uint8_t ep, uint16_t status);
-	void setEpType(uint8_t ep, uint16_t type);
-	BufferTable *mBufferTable;
-
-  public:
-	Usbd(USB_TypeDef *peri, void (*clockFunc)(bool en), void (*nvicFunc)(bool en), void (*resetFunc)(void));
-	void init(void);
-	void isr(void);
 	void resetCore(void);
+
+	struct Setup_t
+	{
+		YSS_USB_TypeDef *dev;
+	};
+
+	Usbd(const Drv::Setup_t drvSetup, const Setup_t setup);
+
+	void isr(void);
+
+private :
+	//struct BufferInfo
+	//{
+	//	uint16_t addr;
+	//	uint16_t rsvd0;
+	//	uint16_t cnt;
+	//	uint16_t rsvd1;
+	//}__attribute__ ((__packed__));
+
+	//struct BufferTable
+	//{
+	//	BufferInfo tx0;
+	//	BufferInfo rx0;
+	//	BufferInfo tx1;
+	//	BufferInfo rx1;
+	//	BufferInfo tx2;
+	//	BufferInfo rx2;
+	//	BufferInfo tx3;
+	//	BufferInfo rx3;
+	//}__attribute__ ((__packed__));
+
+	//YSS_USB_TypeDef *mDev;
+	//void setEpStatusTx(uint8_t ep, uint16_t status);
+	//void setEpStatusRx(uint8_t ep, uint16_t status);
+	//void setEpType(uint8_t ep, uint16_t type);
+	//BufferTable *mBufferTable;
 };
 
-#endif
-
-#endif
-*/
 #endif
 

@@ -34,16 +34,8 @@ class Dma;
 class Drv : public Mutex
 {
   public:
-	struct Config
-	{
-		void (*clockFunc)(bool en);
-		void (*nvicFunc)(bool en);
-		void (*resetFunc)(void);
-		uint32_t (*getClockFunc)(void);
-	};
-	
 	// 앞으로 Config 대신에 Setup을 사용할 예정
-	struct Setup
+	struct Setup_t
 	{
 		void (*clockFunc)(bool en);
 		void (*nvicFunc)(bool en);
@@ -68,9 +60,7 @@ class Drv : public Mutex
 	// 아래 함수는 시스템 함수로 사용자 호출을 금한다.
 	Drv(void (*clockFunc)(bool en), void (*nvicFunc)(bool en), void (*resetFunc)(void) = 0);
 
-	Drv(const Config &config);
-
-	Drv(const Setup &setup);
+	Drv(const Setup_t &setup);
 
 	Drv(void);
 

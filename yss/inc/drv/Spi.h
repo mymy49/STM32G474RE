@@ -152,7 +152,7 @@ class Spi : public Drv
 	// 인터럽트 벡터에서 호출되는 함수이다.
 	// 사용자 임의의 호출은 금지한다.
 #if defined(GD32F1) || defined(STM32F1) || defined(GD32F4)  || defined(STM32F7) || defined(STM32F0) || defined(STM32F4)
-	struct Setup
+	struct Setup_t
 	{
 		YSS_SPI_Peri *dev;
 		Dma &txDma;
@@ -161,7 +161,7 @@ class Spi : public Drv
 		Dma::DmaInfo rxDmaInfo;
 	};
 #elif defined(EFM32PG22)
-	struct Setup
+	struct Setup_t
 	{
 		YSS_SPI_Peri *dev;
 		Dma **dmaChannelList;
@@ -170,7 +170,7 @@ class Spi : public Drv
 	};
 #endif
 
-	Spi(const Drv::Setup drvSetup, const Setup setup);
+	Spi(const Drv::Setup_t drvSetup, const Setup_t setup);
 
 	void isr(void);
 

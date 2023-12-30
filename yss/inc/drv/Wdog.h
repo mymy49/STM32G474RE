@@ -57,7 +57,7 @@ public:
 		YSS_WDOG_peri *dev;
 	};
 
-	Wdog(const Drv::Config drvConfig, const Config config);
+	Wdog(const Drv::Setup_t drvConfig, const Config config);
 
 private:
 	YSS_WDOG_peri *mPeri;

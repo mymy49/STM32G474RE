@@ -34,7 +34,7 @@
 #include <yss/reg.h>
 #include <targets/st/bitfield.h>
 
-Spi::Spi(const Drv::Setup drvSetup, const Setup setup) : Drv(drvSetup)
+Spi::Spi(const Drv::Setup_t drvSetup, const Setup_t setup) : Drv(drvSetup)
 {
 	mDev = setup.dev;
 	mTxDma = &setup.txDma;

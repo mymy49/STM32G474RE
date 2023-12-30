@@ -52,7 +52,7 @@ static void enableInterruptPdm0(bool en)
 	nvic.unlock();
 }
 
-static const Drv::Setup gDrvPdm0Setup
+static const Drv::Setup_t gDrvPdm0Setup
 {
 	enableClockPdm0,		//void (*clockFunc)(bool en);
 	enableInterruptPdm0,	//void (*nvicFunc)(bool en);

@@ -49,7 +49,9 @@
 #endif
 
 using namespace define::dma;
+#if defined(STM32G4)
 using namespace define::dmamux;
+#endif
 
 #if USART2_ENABLE || USART3_ENABLE || USART4_ENABLE || UART4_ENABLE || USART5_ENABLE || UART5_ENABLE || UART7_ENABLE || UART8_ENABLE
 static uint32_t getApb1ClockFrequency(void)
@@ -87,7 +89,7 @@ static void resetUart1(void)
 	clock.unlock();
 }
 
-static const Drv::Setup gDrvUart1Setup
+static const Drv::Setup_t gDrvUart1Setup
 {
 	enableUart1Clock,		//void (*clockFunc)(bool en);
 	enableUart1Interrupt,	//void (*nvicFunc)(bool en);
@@ -160,7 +162,7 @@ static const Dma::DmaInfo gUart1RxDmaInfo =
 };
 #endif
 
-static const Uart::Setup gUart1Setup
+static const Uart::Setup_t gUart1Setup
 {
 #if defined(STM32F030xC)
 	USART1,	//YSS_USART_Peri *peri;
@@ -224,7 +226,7 @@ static void resetUart2(void)
 	clock.unlock();
 }
 
-static const Drv::Setup gDrvUart2Setup= 
+static const Drv::Setup_t gDrvUart2Setup= 
 {
 	enableUart2Clock,		//void (*clockFunc)(bool en);
 	enableUart2Interrupt,	//void (*nvicFunc)(bool en);
@@ -297,7 +299,7 @@ static const Dma::DmaInfo gUart2RxDmaInfo =
 };
 #endif
 
-static const Uart::Setup gUart2Setup = 
+static const Uart::Setup_t gUart2Setup = 
 {
 #if defined(STM32F030xC)
 	(YSS_USART_Peri*)USART2,	//YSS_USART_Peri *peri;
@@ -363,7 +365,7 @@ static void resetUart3(void)
 	clock.unlock();
 }
 
-static const Drv::Setup gDrvUart3Setup
+static const Drv::Setup_t gDrvUart3Setup
 {
 	enableUart3Clock,		//void (*clockFunc)(bool en);
 	enableUart3Interrupt,	//void (*nvicFunc)(bool en);
@@ -436,7 +438,7 @@ static const Dma::DmaInfo gUart3RxDmaInfo =
 };
 #endif
 
-static const Uart::Setup gUart3Setup
+static const Uart::Setup_t gUart3Setup
 {
 #if defined(STM32F030xC)
 	USART3,			//YSS_SPI_Peri *peri;
@@ -515,7 +517,7 @@ static void resetUart4(void)
 	clock.unlock();
 }
 
-static const Drv::Setup gDrvUart4Setup = 
+static const Drv::Setup_t gDrvUart4Setup = 
 {
 	enableUart4Clock,		//void (*clockFunc)(bool en);
 	enableUart4Interrupt,	//void (*nvicFunc)(bool en);
@@ -588,7 +590,7 @@ static const Dma::DmaInfo gUart4RxDmaInfo =
 };
 #endif
 
-static const Uart::Setup gUart4Setup = 
+static const Uart::Setup_t gUart4Setup = 
 {
 #if defined(STM32F030xC)
 	USART4,			//YSS_SPI_Peri *peri;
@@ -669,7 +671,7 @@ static void resetUart5(void)
 	clock.unlock();
 }
 
-static const Drv::Setup gDrvUart5Setup
+static const Drv::Setup_t gDrvUart5Setup
 {
 	enableUart5Clock,		//void (*clockFunc)(bool en);
 	enableUart5Interrupt,	//void (*nvicFunc)(bool en);
@@ -742,7 +744,7 @@ static const Dma::DmaInfo gUart5RxDmaInfo =
 };
 #endif
 
-static const Uart::Setup gUart5Setup
+static const Uart::Setup_t gUart5Setup
 {
 #if defined(STM32F030xC)
 	USART5,			//YSS_SPI_Peri *peri;
@@ -808,7 +810,7 @@ static void resetUart6(void)
 	clock.unlock();
 }
 
-static const Drv::Setup gDrvUart6Setup
+static const Drv::Setup_t gDrvUart6Setup
 {
 	enableUart6Clock,		//void (*clockFunc)(bool en);
 	enableUart6Interrupt,	//void (*nvicFunc)(bool en);
@@ -860,7 +862,7 @@ static const Dma::DmaInfo gUart6TxDmaInfo =
 };
 #endif
 
-static const Uart::Setup gUart6Setup
+static const Uart::Setup_t gUart6Setup
 {
 	USART6,			//YSS_SPI_Peri *peri;
 #if defined(STM32F030xC)
@@ -910,7 +912,7 @@ static void resetUart7(void)
 	clock.unlock();
 }
 
-static const Drv::Setup gDrvUart7Setup
+static const Drv::Setup_t gDrvUart7Setup
 {
 	enableUart7Clock,		//void (*clockFunc)(bool en);
 	enableUart7Interrupt,	//void (*nvicFunc)(bool en);
@@ -940,7 +942,7 @@ static const Dma::DmaInfo gUart7TxDmaInfo =
 #endif
 };
 
-static const Uart::Setup gUart7Setup
+static const Uart::Setup_t gUart7Setup
 {
 	UART7,			//YSS_SPI_Peri *peri;
 	dmaChannel2,	//Dma &txDma;
@@ -982,7 +984,7 @@ static void resetUart8(void)
 	clock.unlock();
 }
 
-static const Drv::Setup gDrvUart8Setup
+static const Drv::Setup_t gDrvUart8Setup
 {
 	enableUart8Clock,		//void (*clockFunc)(bool en);
 	enableUart8Interrupt,	//void (*nvicFunc)(bool en);
@@ -1012,7 +1014,7 @@ static const Dma::DmaInfo gUart8TxDmaInfo =
 #endif
 };
 
-static const Uart::Setup gUart8Setup
+static const Uart::Setup_t gUart8Setup
 {
 	UART8,			//YSS_SPI_Peri *peri;
 	dmaChannel1,	//Dma &txDma;

@@ -87,15 +87,15 @@ public:
 		BIT_32
 	};
 
-	struct Setup
+	struct Setup_t
 	{
 		YSS_TIMER_Dev *dev;
 		uint8_t bit;
 	};
 
-	Timer(YSS_TIMER_Dev *config, const Drv::Config drvConfig);
+	Timer(YSS_TIMER_Dev *config, const Drv::Setup_t drvConfig);
 
-	Timer(const Drv::Setup drvSetup, const Setup setup);
+	Timer(const Drv::Setup_t drvSetup, const Setup_t setup);
 
 	void isrUpdate(void);
 

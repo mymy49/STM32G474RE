@@ -67,7 +67,7 @@ public:
 	error setSpecification(const Specification_t &spec);
 
 	// 아래 함수는 시스템 함수로 사용자 호출을 금한다.
-	Pbus(const Drv::Setup drvSetup);
+	Pbus(const Drv::Setup_t drvSetup);
 
 private:
 };

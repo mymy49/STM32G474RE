@@ -125,11 +125,8 @@ namespace define
 					PLL = 3,
 				};
 			}
-		}
 
-		namespace divisionFactor
-		{
-			namespace ahb
+			namespace ahbDiv
 			{
 				enum
 				{
@@ -145,7 +142,7 @@ namespace define
 				};
 			}
 
-			namespace apb
+			namespace apbDiv
 			{
 				enum
 				{
@@ -156,7 +153,10 @@ namespace define
 					DIV16 = 0x7,
 				};
 			}
+		}
 
+		namespace divisionFactor
+		{
 			namespace ltdc
 			{
 				enum

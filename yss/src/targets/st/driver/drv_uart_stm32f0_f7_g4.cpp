@@ -33,7 +33,7 @@
 #include <yss/thread.h>
 #include <targets/st/bitfield.h>
 
-Uart::Uart(const Drv::Setup drvSetup, const Setup setup) : Drv(drvSetup)
+Uart::Uart(const Drv::Setup_t drvSetup, const Setup_t setup) : Drv(drvSetup)
 {
 #if defined(YSS__UART_RX_DMA)
 	mTxDmaInfo = setup.txDmaInfo;

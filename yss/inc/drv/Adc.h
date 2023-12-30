@@ -97,14 +97,14 @@ class Adc : public Drv
 #endif
 
 	// 아래 함수들은 시스템 함수로 사용자 호출을 금한다.
-	struct Setup
+	struct Setup_t
 	{
 		YSS_ADC_Dev *dev;
 	};
 
 	Adc(YSS_ADC_Dev *dev, void (*clockFunc)(bool en), void (*nvicFunc)(bool en), void (*resetFunc)(void));
 
-	Adc(const Drv::Setup drvSetup, const Setup setup);
+	Adc(const Drv::Setup_t drvSetup, const Setup_t setup);
 
 	void isr(void);
 
