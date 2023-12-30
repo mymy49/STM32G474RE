@@ -33,7 +33,7 @@
 
 #if defined(FMC_Bank1)
 
-Pbus::Pbus(const Drv::Setup drvSetup) : Drv(drvSetup)
+Pbus::Pbus(const Drv::Setup_t drvSetup) : Drv(drvSetup)
 {
 	
 }

@@ -194,27 +194,27 @@ class Uart : public Drv
 
 	// 아래 함수는 시스템 함수로 사용자 호출을 금한다.
 #if defined(GD32F1) || defined(STM32F1) || defined(GD32F4)  || defined(STM32F7) || defined(STM32F4) || defined(STM32F0)
-	struct Setup
+	struct Setup_t
 	{
 		YSS_USART_Peri *dev;
 		Dma &txDma;
 		Dma::DmaInfo txDmaInfo;
 	};
 #elif defined(EFM32PG22) || defined(EFR32BG22) || defined(STM32G4)
-	struct Setup
+	struct Setup_t
 	{
 		YSS_USART_Peri *dev;
 		Dma::DmaInfo txDmaInfo;
 		Dma::DmaInfo rxDmaInfo;
 	};
 #elif defined(NRF52840_XXAA)
-	struct Setup
+	struct Setup_t
 	{
 		YSS_USART_Peri *dev;
 	};
-#endif	
+#endif
 
-	Uart(const Drv::Setup drvSetup, const Uart::Setup setup);
+	Uart(const Drv::Setup_t drvSetup, const Uart::Setup_t setup);
 
 	void push(int8_t data);
 

@@ -85,9 +85,9 @@ void __WEAK initializeSystem(void)
 #if defined(STM32G474xx)
 	clock.setSysclk(
 		sysclk::src::PLL,				// uint8_t sysclkSrc
-		divisionFactor::ahb::NO_DIV,	// uint8_t ahbDiv
-		divisionFactor::apb::DIV4,		// uint8_t apb1Div
-		divisionFactor::apb::DIV2		// uint8_t apb2Div
+		sysclk::ahbDiv::NO_DIV,	// uint8_t ahbDiv
+		sysclk::apbDiv::DIV4,		// uint8_t apb1Div
+		sysclk::apbDiv::DIV2		// uint8_t apb2Div
 #else
 #error "SYSCLK 설정을 추가해주세요."
 #endif

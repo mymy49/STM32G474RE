@@ -62,12 +62,12 @@ static void resetAdc1(void)
 	clock.unlock();
 }
 
-static const Adc::Setup gAdc1Setup
+static const Adc::Setup_t gAdc1Setup
 {
 	ADC1
 };
 
-static const Drv::Setup gDrvAdc1Setup
+static const Drv::Setup_t gDrvAdc1Setup
 {
 	enableClockAdc1,		//void (*clockFunc)(bool en);
 	enableInterruptAdc1,	//void (*nvicFunc)(bool en);

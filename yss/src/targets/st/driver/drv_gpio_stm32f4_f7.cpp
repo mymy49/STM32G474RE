@@ -31,7 +31,7 @@
 #include <yss/reg.h>
 #include <targets/st/bitfield.h>
 
-Gpio::Gpio(const Drv::Setup drvSetup, const Setup setup) : GpioBase(drvSetup)
+Gpio::Gpio(const Drv::Setup_t drvSetup, const Setup_t setup) : GpioBase(drvSetup)
 {
 	mDev = setup.dev;
 	mExti = setup.exti;

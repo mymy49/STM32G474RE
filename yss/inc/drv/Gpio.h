@@ -86,7 +86,7 @@ public :
 	};
 
 	// 아래 함수는 시스템 함수로 사용자 호출을 금한다.
-	GpioBase(const Drv::Setup drvSetup) : Drv(drvSetup) {}
+	GpioBase(const Drv::Setup_t drvSetup) : Drv(drvSetup) {}
 };
 
 #include GpioTargetHeaderFile

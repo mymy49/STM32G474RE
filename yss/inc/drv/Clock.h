@@ -31,7 +31,7 @@
 #if defined(STM32F1) || defined(GD32F1)
 #define IncludeSubClassHeader	<targets/st/class_clock_stm32f1.h>
 #elif defined(STM32F4) || defined(STM32F7)
-#define IncludeSubClassHeader	<targets/st/class_clock_stm32f4_f7.h>
+#include <targets/st/class_clock_stm32f4_f7.h>
 #elif defined(STM32G4)
 #include <targets/st/class_clock_stm32g4.h>
 #elif defined(STM32F0)
@@ -57,7 +57,7 @@ class Clock
 
 #ifndef YSS_DRV_CLOCK_UNSUPPORTED
 
-#if defined(STM32G4)
+#if defined(STM32G4) || defined(STM32F7) || defined(STM32F4)
 
 #else
 class ClockBase : public Mutex

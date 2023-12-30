@@ -28,7 +28,7 @@
 
 #include "Color.h"
 #include "Font.h"
-#include "FrameBuffer_.h"
+#include "FrameBuffer.h"
 #include <config.h>
 
 #if USE_GUI && YSS_L_HEAP_USE
@@ -36,7 +36,7 @@ class Object;
 class Painter;
 #endif
 
-class Brush : public FrameBuffer_
+class Brush : public FrameBuffer
 {
 public:
 	Brush(void);

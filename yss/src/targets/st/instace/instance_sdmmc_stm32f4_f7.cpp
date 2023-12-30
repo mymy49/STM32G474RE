@@ -56,7 +56,7 @@ static uint32_t getClockFrequency(void)
 #endif
 }
 
-static const Drv::Config gDrvConfig
+static const Drv::Setup_t gDrvConfig
 {
 	setClockEn,				//void (*clockFunc)(bool en);
 	0,						//void (*nvicFunc)(bool en);

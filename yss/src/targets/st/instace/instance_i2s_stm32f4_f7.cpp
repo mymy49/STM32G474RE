@@ -63,7 +63,7 @@ static void resetI2s2(void)
 	clock.unlock();
 }
 
-static const Drv::Config gDrvI2s2Config
+static const Drv::Setup_t gDrvI2s2Config
 {
 	enableI2s2Clock,		// void (*clockFunc)(bool en);
 	enableI2s2Interrupt,	// void (*nvicFunc)(bool en);

@@ -33,15 +33,7 @@ Drv::Drv(void (*clockFunc)(bool en), void (*nvicFunc)(bool en), void (*resetFunc
 	mResetFunc = resetFunc;
 }
 
-Drv::Drv(const Config &config)
-{
-	mClockFunc = config.clockFunc;
-	mNvicFunc = config.nvicFunc;
-	mResetFunc = config.resetFunc;
-	mGetClockFunc = config.getClockFunc;
-}
-
-Drv::Drv(const Setup &setup)
+Drv::Drv(const Setup_t &setup)
 {
 	mClockFunc = setup.clockFunc;
 	mNvicFunc = setup.nvicFunc;
@@ -83,6 +75,7 @@ uint32_t Drv::getClockFrequency(void)
 		return 0;
 }
 
+#if defined(DMA_OCCUPANCY_ABLE)
 Dma* Drv::getOccupancyDma(void)
 {
 	while(1)
@@ -108,3 +101,5 @@ Dma* Drv::getIdleDma(void)
 		thread::yield();
 	}
 }
+#endif
+

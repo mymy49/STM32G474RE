@@ -53,7 +53,7 @@ static void enableDma1Channel1Interrupt(bool en)
     nvic.unlock();
 }
 
-const Drv::Setup gDrvDmaChannel1Config = 
+const Drv::Setup_t gDrvDmaChannel1Config = 
 {
 	enableDma1Clock,				//void (*clockFunc)(bool en);
 	enableDma1Channel1Interrupt,	//void (*nvicFunc)(bool en);
@@ -61,7 +61,7 @@ const Drv::Setup gDrvDmaChannel1Config =
 	0								//uint32_t (*getClockFunc)(void);
 };
 
-const Dma::Setup gDma1Config = 
+const Dma::Setup_t gDma1Config = 
 {
 	DMA1,				// YSS_DMA_Peri *dma;
 	DMA1_Channel1,		// YSS_DMA_Channel_Peri *peri;
@@ -89,7 +89,7 @@ static void enableDma1Channel2Interrupt(bool en)
     nvic.unlock();
 }
 
-const Drv::Setup gDrvDmaChannel2Config = 
+const Drv::Setup_t gDrvDmaChannel2Config = 
 {
 	enableDma1Clock,				//void (*clockFunc)(bool en);
 	enableDma1Channel2Interrupt,	//void (*nvicFunc)(bool en);
@@ -97,7 +97,7 @@ const Drv::Setup gDrvDmaChannel2Config =
 	0								//uint32_t (*getClockFunc)(void);
 };
 
-const Dma::Setup gDma2Config = 
+const Dma::Setup_t gDma2Config = 
 {
 	DMA1,				//YSS_DMA_Peri *dma;
 	DMA1_Channel2,		// YSS_DMA_Channel_Peri *peri;
@@ -125,7 +125,7 @@ static void enableDma1Channel3Interrupt(bool en)
     nvic.unlock();
 }
 
-const Drv::Setup gDrvDmaChannel3Config = 
+const Drv::Setup_t gDrvDmaChannel3Config = 
 {
 	enableDma1Clock,				//void (*clockFunc)(bool en);
 	enableDma1Channel3Interrupt,	//void (*nvicFunc)(bool en);
@@ -133,7 +133,7 @@ const Drv::Setup gDrvDmaChannel3Config =
 	0								//uint32_t (*getClockFunc)(void);
 };
 
-const Dma::Setup gDma3Config = 
+const Dma::Setup_t gDma3Config = 
 {
 	DMA1,				//YSS_DMA_Peri *dma;
 	DMA1_Channel3,		// YSS_DMA_Channel_Peri *peri;
@@ -161,7 +161,7 @@ static void enableDma1Channel4Interrupt(bool en)
     nvic.unlock();
 }
 
-const Drv::Setup gDrvDmaChannel4Config = 
+const Drv::Setup_t gDrvDmaChannel4Config = 
 {
 	enableDma1Clock,				//void (*clockFunc)(bool en);
 	enableDma1Channel4Interrupt,	//void (*nvicFunc)(bool en);
@@ -169,7 +169,7 @@ const Drv::Setup gDrvDmaChannel4Config =
 	0								//uint32_t (*getClockFunc)(void);
 };
 
-const Dma::Setup gDma4Config = 
+const Dma::Setup_t gDma4Config = 
 {
 	DMA1,				// YSS_DMA_Peri *dma;
 	DMA1_Channel4,		// YSS_DMA_Channel_Peri *peri;
@@ -197,7 +197,7 @@ static void enableDma1Channel5Interrupt(bool en)
     nvic.unlock();
 }
 
-const Drv::Setup gDrvDmaChannel5Config = 
+const Drv::Setup_t gDrvDmaChannel5Config = 
 {
 	enableDma1Clock,				//void (*clockFunc)(bool en);
 	enableDma1Channel5Interrupt,	//void (*nvicFunc)(bool en);
@@ -205,7 +205,7 @@ const Drv::Setup gDrvDmaChannel5Config =
 	0								//uint32_t (*getClockFunc)(void);
 };
 
-const Dma::Setup gDma5Config = 
+const Dma::Setup_t gDma5Config = 
 {
 	DMA1,	//YSS_DMA_Peri *dma;
 	DMA1_Channel5,	//YSS_DMA_Channel_Peri *peri;	
@@ -233,7 +233,7 @@ static void enableDma1Channel6Interrupt(bool en)
     nvic.unlock();
 }
 
-const Drv::Setup gDrvDmaChannel6Config = 
+const Drv::Setup_t gDrvDmaChannel6Config = 
 {
 	enableDma1Clock,				//void (*clockFunc)(bool en);
 	enableDma1Channel6Interrupt,	//void (*nvicFunc)(bool en);
@@ -241,7 +241,7 @@ const Drv::Setup gDrvDmaChannel6Config =
 	0								//uint32_t (*getClockFunc)(void);
 };
 
-const Dma::Setup gDma6Config = 
+const Dma::Setup_t gDma6Config = 
 {
 	DMA1,				// YSS_DMA_Peri *dma;
 	DMA1_Channel6,		// YSS_DMA_Channel_Peri *peri;
@@ -269,7 +269,7 @@ static void enableDma1Channel7Interrupt(bool en)
     nvic.unlock();
 }
 
-const Drv::Setup gDrvDmaChannel7Config = 
+const Drv::Setup_t gDrvDmaChannel7Config = 
 {
 	enableDma1Clock,				//void (*clockFunc)(bool en);
 	enableDma1Channel7Interrupt,	//void (*nvicFunc)(bool en);
@@ -277,7 +277,7 @@ const Drv::Setup gDrvDmaChannel7Config =
 	0								//uint32_t (*getClockFunc)(void);
 };
 
-const Dma::Setup gDma7Config = 
+const Dma::Setup_t gDma7Config = 
 {
 	DMA1,				// YSS_DMA_Peri *dma;
 	DMA1_Channel7,		// YSS_DMA_Channel_Peri *peri;
@@ -305,7 +305,7 @@ static void enableDma1Channel8Interrupt(bool en)
     nvic.unlock();
 }
 
-const Drv::Setup gDrvDmaChannel8Config = 
+const Drv::Setup_t gDrvDmaChannel8Config = 
 {
 	enableDma1Clock,				//void (*clockFunc)(bool en);
 	enableDma1Channel8Interrupt,	//void (*nvicFunc)(bool en);
@@ -313,7 +313,7 @@ const Drv::Setup gDrvDmaChannel8Config =
 	0								//uint32_t (*getClockFunc)(void);
 };
 
-const Dma::Setup gDma8Config = 
+const Dma::Setup_t gDma8Config = 
 {
 	DMA1,				// YSS_DMA_Peri *dma;
 	DMA1_Channel8,		// YSS_DMA_Channel_Peri *peri;
@@ -348,7 +348,7 @@ static void enableDma2Channel1Interrupt(bool en)
     nvic.unlock();
 }
 
-const Drv::Setup gDrvDmaChannel9Config = 
+const Drv::Setup_t gDrvDmaChannel9Config = 
 {
 	enableDma2Clock,				//void (*clockFunc)(bool en);
 	enableDma2Channel1Interrupt,	//void (*nvicFunc)(bool en);
@@ -356,7 +356,7 @@ const Drv::Setup gDrvDmaChannel9Config =
 	0								//uint32_t (*getClockFunc)(void);
 };
 
-const Dma::Setup gDma9Config = 
+const Dma::Setup_t gDma9Config = 
 {
 	DMA2,				//YSS_DMA_Peri *dma;
 	DMA2_Channel1,		//YSS_DMA_Channel_Peri *peri;	
@@ -384,7 +384,7 @@ static void enableDma2Channel2Interrupt(bool en)
     nvic.unlock();
 }
 
-const Drv::Setup gDrvDmaChannel10Config = 
+const Drv::Setup_t gDrvDmaChannel10Config = 
 {
 	enableDma2Clock,				//void (*clockFunc)(bool en);
 	enableDma2Channel2Interrupt,	//void (*nvicFunc)(bool en);
@@ -392,7 +392,7 @@ const Drv::Setup gDrvDmaChannel10Config =
 	0								//uint32_t (*getClockFunc)(void);
 };
 
-const Dma::Setup gDma10Config = 
+const Dma::Setup_t gDma10Config = 
 {
 	DMA2,			//YSS_DMA_Peri *dma;
 	DMA2_Channel2,		//YSS_DMA_Channel_Peri *peri;	
@@ -420,7 +420,7 @@ static void enableDma2Channel3Interrupt(bool en)
     nvic.unlock();
 }
 
-const Drv::Setup gDrvDmaChannel11Config = 
+const Drv::Setup_t gDrvDmaChannel11Config = 
 {
 	enableDma2Clock,				//void (*clockFunc)(bool en);
 	enableDma2Channel3Interrupt,	//void (*nvicFunc)(bool en);
@@ -428,7 +428,7 @@ const Drv::Setup gDrvDmaChannel11Config =
 	0								//uint32_t (*getClockFunc)(void);
 };
 
-const Dma::Setup gDma11Config = 
+const Dma::Setup_t gDma11Config = 
 {
 	DMA2,			//YSS_DMA_Peri *dma;
 	DMA2_Channel3,		//YSS_DMA_Channel_Peri *peri;	
@@ -456,7 +456,7 @@ static void enableDma2Channel4Interrupt(bool en)
     nvic.unlock();
 }
 
-const Drv::Setup gDrvDmaChannel12Config = 
+const Drv::Setup_t gDrvDmaChannel12Config = 
 {
 	enableDma2Clock,				//void (*clockFunc)(bool en);
 	enableDma2Channel4Interrupt,	//void (*nvicFunc)(bool en);
@@ -464,7 +464,7 @@ const Drv::Setup gDrvDmaChannel12Config =
 	0								//uint32_t (*getClockFunc)(void);
 };
 
-const Dma::Setup gDma12Config = 
+const Dma::Setup_t gDma12Config = 
 {
 	DMA2,			//YSS_DMA_Peri *dma;
 	DMA2_Channel4,		//YSS_DMA_Channel_Peri *peri;	
@@ -492,7 +492,7 @@ static void enableDma2Channel5Interrupt(bool en)
     nvic.unlock();
 }
 
-const Drv::Setup gDrvDmaChannel13Config = 
+const Drv::Setup_t gDrvDmaChannel13Config = 
 {
 	enableDma2Clock,				//void (*clockFunc)(bool en);
 	enableDma2Channel5Interrupt,	//void (*nvicFunc)(bool en);
@@ -500,7 +500,7 @@ const Drv::Setup gDrvDmaChannel13Config =
 	0								//uint32_t (*getClockFunc)(void);
 };
 
-const Dma::Setup gDma13Config = 
+const Dma::Setup_t gDma13Config = 
 {
 	DMA2,			//YSS_DMA_Peri *dma;
 	DMA2_Channel5,		//YSS_DMA_Channel_Peri *peri;	
@@ -528,7 +528,7 @@ static void enableDma2Channel6Interrupt(bool en)
     nvic.unlock();
 }
 
-const Drv::Setup gDrvDmaChannel14Config = 
+const Drv::Setup_t gDrvDmaChannel14Config = 
 {
 	enableDma2Clock,				//void (*clockFunc)(bool en);
 	enableDma2Channel6Interrupt,	//void (*nvicFunc)(bool en);
@@ -536,7 +536,7 @@ const Drv::Setup gDrvDmaChannel14Config =
 	0								//uint32_t (*getClockFunc)(void);
 };
 
-const Dma::Setup gDma14Config = 
+const Dma::Setup_t gDma14Config = 
 {
 	DMA2,			//YSS_DMA_Peri *dma;
 	DMA2_Channel6,		//YSS_DMA_Channel_Peri *peri;	
@@ -564,7 +564,7 @@ static void enableDma2Channel7Interrupt(bool en)
     nvic.unlock();
 }
 
-const Drv::Setup gDrvDmaChannel15Config = 
+const Drv::Setup_t gDrvDmaChannel15Config = 
 {
 	enableDma2Clock,				//void (*clockFunc)(bool en);
 	enableDma2Channel7Interrupt,	//void (*nvicFunc)(bool en);
@@ -572,7 +572,7 @@ const Drv::Setup gDrvDmaChannel15Config =
 	0								//uint32_t (*getClockFunc)(void);
 };
 
-const Dma::Setup gDma15Config = 
+const Dma::Setup_t gDma15Config = 
 {
 	DMA2,			//YSS_DMA_Peri *dma;
 	DMA2_Channel7,		//YSS_DMA_Channel_Peri *peri;	
@@ -600,7 +600,7 @@ static void enableDma2Channel8Interrupt(bool en)
     nvic.unlock();
 }
 
-const Drv::Setup gDrvDmaChannel16Config = 
+const Drv::Setup_t gDrvDmaChannel16Config = 
 {
 	enableDma2Clock,				//void (*clockFunc)(bool en);
 	enableDma2Channel8Interrupt,	//void (*nvicFunc)(bool en);
@@ -608,7 +608,7 @@ const Drv::Setup gDrvDmaChannel16Config =
 	0								//uint32_t (*getClockFunc)(void);
 };
 
-const Dma::Setup gDma16Config = 
+const Dma::Setup_t gDma16Config = 
 {
 	DMA2,			//YSS_DMA_Peri *dma;
 	DMA2_Channel8,		//YSS_DMA_Channel_Peri *peri;	
